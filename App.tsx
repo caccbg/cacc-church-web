@@ -1,5 +1,5 @@
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { HashRouter as Router, Routes, Route, Navigate, Outlet, Link } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import AIAssistant from './components/AIAssistant';
@@ -10,11 +10,20 @@ import { Landing, Auth, Contact, Ministries, About, Events } from './pages/Publi
 import { Dashboard, Sermons, LiveStream, Giving, MemberProfile, PrayerRequest } from './pages/Member';
 import { AdminDashboard } from './pages/Admin';
 
+type Theme = 'light' | 'dark' | 'system';
+
+interface MainLayoutProps {
+  role: UserRole;
+  setRole: (role: UserRole) => void;
+  theme: Theme;
+  setTheme: (theme: Theme) => void;
+}
+
 // Layout component to wrap pages that should have Navbar and Footer
-const MainLayout: React.FC<{role: UserRole, setRole: (role: UserRole) => void}> = ({ role, setRole }) => {
+const MainLayout: React.FC<MainLayoutProps> = ({ role, setRole, theme, setTheme }) => {
   return (
     <div className="min-h-screen flex flex-col font-body">
-      <Navbar role={role} setRole={setRole} />
+      <Navbar role={role} setRole={setRole} theme={theme} setTheme={setTheme} />
       <main className="flex-1">
         <Outlet />
       </main>
@@ -130,6 +139,29 @@ const MainLayout: React.FC<{role: UserRole, setRole: (role: UserRole) => void}> 
 
 const App: React.FC = () => {
   const [role, setRole] = useState<UserRole>(UserRole.GUEST);
+  const [theme, setTheme] = useState<Theme>('system');
+
+  useEffect(() => {
+    const root = window.document.documentElement;
+    const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
+
+    const applyTheme = () => {
+      root.classList.remove('light', 'dark');
+      
+      if (theme === 'system') {
+        root.classList.add(mediaQuery.matches ? 'dark' : 'light');
+      } else {
+        root.classList.add(theme);
+      }
+    };
+
+    applyTheme();
+
+    if (theme === 'system') {
+      mediaQuery.addEventListener('change', applyTheme);
+      return () => mediaQuery.removeEventListener('change', applyTheme);
+    }
+  }, [theme]);
 
   return (
     <Router>
@@ -141,7 +173,7 @@ const App: React.FC = () => {
         <Route path="/admin" element={role === UserRole.ADMIN ? <AdminDashboard /> : <Navigate to="/auth" />} />
         
         {/* Main Application with Layout (Navbar + Footer) */}
-        <Route element={<MainLayout role={role} setRole={setRole} />}>
+        <Route element={<MainLayout role={role} setRole={setRole} theme={theme} setTheme={setTheme} />}>
             <Route path="/" element={<Landing />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="/ministries" element={<Ministries />} />

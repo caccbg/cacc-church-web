@@ -6,14 +6,22 @@ import { Link, useLocation } from 'react-router-dom';
 interface NavbarProps {
   role: UserRole;
   setRole: (role: UserRole) => void;
+  theme: 'light' | 'dark' | 'system';
+  setTheme: (theme: 'light' | 'dark' | 'system') => void;
 }
 
-const Navbar: React.FC<NavbarProps> = ({ role, setRole }) => {
+const Navbar: React.FC<NavbarProps> = ({ role, setRole, theme, setTheme }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const location = useLocation();
 
   const isActive = (path: string) => location.pathname === path ? 'text-primary dark:text-blue-400 font-bold' : 'text-gray-700 dark:text-gray-300 hover:text-primary dark:hover:text-white';
+
+  const cycleTheme = () => {
+    if (theme === 'system') setTheme('light');
+    else if (theme === 'light') setTheme('dark');
+    else setTheme('system');
+  };
 
   return (
     <>
@@ -39,6 +47,18 @@ const Navbar: React.FC<NavbarProps> = ({ role, setRole }) => {
              >
                <span className="material-symbols-outlined text-[18px]">search</span>
                <span className="hidden sm:inline">Search</span>
+             </button>
+             
+             {/* Theme Toggle */}
+             <button 
+               onClick={cycleTheme}
+               className="flex items-center gap-1 hover:text-gray-200 transition-colors ml-2 border-l border-white/20 pl-4"
+               title={`Theme: ${theme.charAt(0).toUpperCase() + theme.slice(1)}`}
+             >
+                <span className="material-symbols-outlined text-[18px]">
+                  {theme === 'light' ? 'light_mode' : theme === 'dark' ? 'dark_mode' : 'contrast'}
+                </span>
+                <span className="hidden sm:inline capitalize font-bold">{theme}</span>
              </button>
           </div>
         </div>
@@ -155,7 +175,7 @@ const Navbar: React.FC<NavbarProps> = ({ role, setRole }) => {
                   type="text" 
                   autoFocus
                   placeholder="Search for sermons, events, or ministries..." 
-                  className="w-full pl-12 pr-4 py-4 bg-gray-50 dark:bg-slate-800 border-none rounded-lg text-lg focus:ring-2 focus:ring-primary"
+                  className="w-full pl-12 pr-4 py-4 bg-gray-50 dark:bg-slate-800 border-none rounded-lg text-lg focus:ring-2 focus:ring-primary dark:text-white"
                 />
                 <span className="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 text-2xl">search</span>
              </div>
