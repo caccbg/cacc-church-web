@@ -48,7 +48,7 @@ const LATEST_SERMONS = [
 ];
 
 // --- MOCK DATA FOR MINISTRIES ---
-const MINISTRY_CATEGORIES = ["All Ministries", "Kids & Youth", "Men", "Women", "Outreach", "Creative Arts"];
+const MINISTRY_CATEGORIES = ["All", "Kids & Youth", "Men", "Women", "Outreach", "Creative Arts"];
 
 const MINISTRIES_DATA = [
   {
@@ -670,95 +670,105 @@ export const Contact: React.FC = () => {
 };
 
 export const Ministries: React.FC = () => {
-    return (
-        <div className="bg-background-light dark:bg-background-dark min-h-screen py-20 px-4 md:px-8 font-sans">
-             <div className="max-w-7xl mx-auto">
-                 <div className="text-center mb-16">
-                     <p className="text-accent-red font-bold text-xs uppercase tracking-widest mb-2">Serve & Connect</p>
-                     <h1 className="text-4xl md:text-5xl font-black text-slate-900 dark:text-white mb-4">Our Ministries</h1>
-                     <p className="text-gray-500 text-lg max-w-2xl mx-auto">Find your place to serve, grow, and belong within the CACC family.</p>
-                 </div>
+  const [selectedCategory, setSelectedCategory] = useState("All");
 
-                 {/* Category Filter */}
-                 <div className="flex flex-wrap justify-center gap-3 mb-12">
-                     {MINISTRY_CATEGORIES.map(cat => (
-                         <button key={cat} className="px-6 py-2 rounded-full border border-gray-200 dark:border-gray-700 font-bold text-sm text-gray-600 dark:text-gray-300 hover:bg-primary hover:text-white hover:border-primary transition">
-                             {cat}
-                         </button>
-                     ))}
-                 </div>
+  const filteredMinistries = selectedCategory === "All" 
+    ? MINISTRIES_DATA 
+    : MINISTRIES_DATA.filter(m => m.category === selectedCategory);
 
-                 {/* Ministries Grid */}
-                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-20">
-                     {MINISTRIES_DATA.map(ministry => (
-                         <div key={ministry.id} className="bg-white dark:bg-slate-800 rounded-3xl overflow-hidden shadow-sm border border-gray-100 dark:border-gray-700 group hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
-                             <div className="h-48 overflow-hidden relative">
-                                 <img src={ministry.image} alt={ministry.title} className="w-full h-full object-cover transition duration-700 group-hover:scale-110" />
-                                 <div className="absolute top-4 left-4 bg-white/90 backdrop-blur px-3 py-1 rounded-lg text-xs font-bold text-primary uppercase tracking-wider">
-                                     {ministry.category}
-                                 </div>
-                             </div>
-                             <div className="p-8">
-                                 <h3 className="text-2xl font-black text-slate-900 dark:text-white mb-3">{ministry.title}</h3>
-                                 <p className="text-gray-500 text-sm leading-relaxed mb-6">{ministry.description}</p>
-                                 
-                                 <div className="flex items-center justify-between pt-6 border-t border-gray-100 dark:border-gray-700">
-                                     <div className="flex items-center gap-3">
-                                         <img src={ministry.leader.avatar} alt={ministry.leader.name} className="size-10 rounded-full object-cover border-2 border-white dark:border-slate-800 shadow-sm" />
-                                         <div>
-                                             <p className="text-[10px] text-gray-400 uppercase font-bold">Leader</p>
-                                             <p className="text-xs font-bold text-slate-900 dark:text-white">{ministry.leader.name}</p>
-                                         </div>
-                                     </div>
-                                     <button className="text-primary font-bold text-sm hover:underline">Join Team</button>
-                                 </div>
-                             </div>
-                         </div>
-                     ))}
-                 </div>
+  return (
+    <div className="bg-gray-50 dark:bg-slate-900 min-h-screen font-sans pb-20">
+      {/* Hero */}
+      <div className="bg-primary text-white py-20 px-4 text-center relative overflow-hidden">
+         <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-10"></div>
+         <div className="relative z-10 max-w-3xl mx-auto">
+            <h1 className="text-4xl md:text-5xl font-black mb-4">Serve & Connect</h1>
+            <p className="text-xl text-blue-100">"As each has received a gift, use it to serve one another, as good stewards of God's varied grace." - 1 Peter 4:10</p>
+         </div>
+      </div>
 
-                 {/* Cell Groups Section */}
-                 <div className="bg-slate-900 rounded-[2.5rem] p-8 md:p-16 text-white relative overflow-hidden">
-                     <div className="absolute top-0 right-0 p-12 opacity-5 pointer-events-none">
-                         <span className="material-symbols-outlined text-[15rem]">groups</span>
+      <div className="max-w-7xl mx-auto px-4 md:px-8 -mt-8 relative z-20">
+         {/* Filters */}
+         <div className="bg-white dark:bg-slate-800 p-2 rounded-xl shadow-lg border border-gray-100 dark:border-gray-700 flex flex-wrap justify-center gap-2 mb-12 w-fit mx-auto">
+             {MINISTRY_CATEGORIES.map(cat => (
+                 <button 
+                    key={cat}
+                    onClick={() => setSelectedCategory(cat)}
+                    className={`px-4 py-2 rounded-lg text-sm font-bold transition ${selectedCategory === cat ? 'bg-primary text-white shadow-md' : 'text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-slate-700'}`}
+                 >
+                     {cat}
+                 </button>
+             ))}
+         </div>
+
+         {/* Ministries Grid */}
+         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-20">
+             {filteredMinistries.map(ministry => (
+                 <div key={ministry.id} className="bg-white dark:bg-slate-800 rounded-2xl overflow-hidden shadow-md hover:shadow-xl transition-shadow border border-gray-100 dark:border-gray-700 flex flex-col">
+                     <div className="h-48 overflow-hidden">
+                         <img src={ministry.image} className="w-full h-full object-cover hover:scale-105 transition-transform duration-500" alt={ministry.title} />
                      </div>
-                     <div className="relative z-10">
-                         <div className="flex flex-col md:flex-row justify-between items-end mb-12 gap-6">
+                     <div className="p-6 flex-1 flex flex-col">
+                         <div className="flex justify-between items-start mb-2">
+                             <h3 className="text-xl font-bold text-slate-900 dark:text-white">{ministry.title}</h3>
+                             <span className="bg-blue-50 dark:bg-blue-900/30 text-primary text-[10px] font-bold px-2 py-1 rounded uppercase tracking-wide">{ministry.category}</span>
+                         </div>
+                         <p className="text-gray-500 dark:text-gray-400 text-sm leading-relaxed mb-6 flex-1">{ministry.description}</p>
+                         
+                         <div className="flex items-center gap-3 mb-6">
+                             <img src={ministry.leader.avatar} className="size-10 rounded-full border-2 border-white dark:border-slate-700 shadow-sm" alt={ministry.leader.name} />
                              <div>
-                                 <p className="text-accent-red font-bold text-xs uppercase tracking-widest mb-2">Life Together</p>
-                                 <h2 className="text-3xl md:text-4xl font-black mb-4">Cell Groups</h2>
-                                 <p className="text-slate-400 max-w-xl">Small groups are the heartbeat of our church. Connect with others in your neighborhood for fellowship and bible study.</p>
+                                 <p className="text-xs font-bold text-slate-900 dark:text-white">{ministry.leader.name}</p>
+                                 <p className="text-[10px] text-gray-400 uppercase font-bold">Leader</p>
                              </div>
-                             <button className="px-6 py-3 bg-white text-slate-900 font-bold rounded-xl hover:bg-gray-100 transition">Find a Group Near You</button>
                          </div>
 
-                         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                             {CELL_GROUPS_DATA.map(group => (
-                                 <div key={group.id} className="bg-white/5 backdrop-blur-sm border border-white/10 p-6 rounded-2xl hover:bg-white/10 transition cursor-pointer">
-                                     <div className="flex justify-between items-start mb-4">
-                                         <div className="size-10 rounded-lg bg-accent-red/20 text-accent-red flex items-center justify-center">
-                                             <span className="material-symbols-outlined">{group.icon}</span>
-                                         </div>
-                                         <span className="bg-green-500/20 text-green-400 text-[10px] font-bold px-2 py-1 rounded uppercase">{group.status}</span>
-                                     </div>
-                                     <h3 className="text-xl font-bold mb-1">{group.name}</h3>
-                                     <p className="text-sm text-slate-400 mb-4">{group.type} • {group.distance}</p>
-                                     <div className="space-y-2 text-sm text-slate-300">
-                                         <div className="flex items-center gap-2">
-                                             <span className="material-symbols-outlined text-base opacity-70">schedule</span> {group.schedule}
-                                         </div>
-                                         <div className="flex items-center gap-2">
-                                             <span className="material-symbols-outlined text-base opacity-70">location_on</span> {group.location}
-                                         </div>
-                                     </div>
-                                 </div>
-                             ))}
-                         </div>
+                         <button className="w-full py-3 bg-gray-50 dark:bg-slate-700 text-slate-700 dark:text-white font-bold rounded-xl hover:bg-primary hover:text-white transition shadow-sm border border-gray-200 dark:border-gray-600 border-b-4 active:border-b-0 active:translate-y-1">
+                             Join Ministry
+                         </button>
                      </div>
                  </div>
+             ))}
+         </div>
+
+         {/* Cell Groups */}
+         <div className="bg-white dark:bg-slate-800 rounded-3xl p-8 md:p-12 shadow-sm border border-gray-100 dark:border-gray-700">
+             <div className="text-center mb-10">
+                 <h2 className="text-3xl font-black text-slate-900 dark:text-white mb-3">Cell Groups</h2>
+                 <p className="text-gray-500 dark:text-gray-400 max-w-2xl mx-auto">Connect with believers near you for fellowship, bible study, and prayer in a smaller, intimate setting.</p>
              </div>
-        </div>
-    );
+
+             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                 {CELL_GROUPS_DATA.map(group => (
+                     <div key={group.id} className="border border-gray-200 dark:border-gray-700 rounded-2xl p-6 flex gap-4 hover:border-primary transition group cursor-pointer bg-gray-50 dark:bg-slate-900/50">
+                         <div className="size-14 bg-white dark:bg-slate-800 rounded-xl flex items-center justify-center text-primary shadow-sm shrink-0 group-hover:scale-110 transition-transform">
+                             <span className="material-symbols-outlined text-3xl">{group.icon}</span>
+                         </div>
+                         <div className="flex-1">
+                             <div className="flex justify-between items-start mb-1">
+                                 <h4 className="font-bold text-lg text-slate-900 dark:text-white group-hover:text-primary transition-colors">{group.name}</h4>
+                                 <span className="text-[10px] font-bold bg-green-100 text-green-700 px-2 py-0.5 rounded uppercase">{group.status}</span>
+                             </div>
+                             <p className="text-sm text-gray-500 mb-2">{group.type} • {group.distance}</p>
+                             <div className="text-xs font-bold text-slate-600 dark:text-slate-400 flex flex-col gap-1">
+                                 <span className="flex items-center gap-1"><span className="material-symbols-outlined text-sm">event</span> {group.schedule}</span>
+                                 <span className="flex items-center gap-1"><span className="material-symbols-outlined text-sm">location_on</span> {group.location}</span>
+                             </div>
+                         </div>
+                         <div className="flex items-center">
+                             <span className="material-symbols-outlined text-gray-300 group-hover:text-primary transition">chevron_right</span>
+                         </div>
+                     </div>
+                 ))}
+             </div>
+             
+             <div className="mt-10 text-center">
+                 <button className="px-8 py-3 bg-primary text-white font-bold rounded-full shadow-lg shadow-blue-500/30 hover:bg-primary-dark transition">Find a Group Near Me</button>
+             </div>
+         </div>
+      </div>
+    </div>
+  );
 };
 
 export const About: React.FC = () => {
