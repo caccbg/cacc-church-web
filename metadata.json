@@ -1,0 +1,8 @@
+{
+  "name": "CACC Digital Ministry",
+  "description": "A modern, faith-centered web application for Christ's Ambassadors Celebration Centre, featuring member dashboards, live streaming, giving, and AI-powered ministry tools.",
+  "requestFramePermissions": [
+    "camera",
+    "microphone"
+  ]
+}
