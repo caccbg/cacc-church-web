@@ -8,12 +8,12 @@ interface AuthProps {
 }
 
 // --- MOCK DATA FOR EVENTS ---
-const UPCOMING_EVENTS: Event[] = [
-  { id: '1', title: 'Mid-Week Deep Dive', date: '2023-10-18', time: '7:00 PM - 8:30 PM', location: 'Fellowship Hall B', category: 'Bible Study', image: 'https://images.unsplash.com/photo-1491841550275-ad7854e35ca6?q=80&w=2574&auto=format&fit=crop' },
-  { id: '2', title: 'Friday Fire Night', date: '2023-10-20', time: '6:30 PM - 9:00 PM', location: 'Youth Center', category: 'Youth', image: 'https://images.unsplash.com/photo-1529070538774-1843cb3265df?q=80&w=2670&auto=format&fit=crop' },
-  { id: '3', title: 'Community Food Drive', date: '2023-10-22', time: '1:00 PM - 4:00 PM', location: 'City Park / Main Entrance', category: 'Outreach', image: 'https://images.unsplash.com/photo-1593113598332-cd288d649433?q=80&w=2670&auto=format&fit=crop' },
-  { id: '4', title: 'Sunday Celebration', date: '2023-10-27', time: '09:00 AM & 11:30 AM', location: 'Main Sanctuary', category: 'Service', image: 'https://images.unsplash.com/photo-1438232992991-995b7058bbb3?q=80&w=2673&auto=format&fit=crop' },
-  { id: '5', title: 'Volunteers Training', date: '2023-10-28', time: '7:00 PM - 9:00 PM', location: 'Conference Room A', category: 'Leadership', image: 'https://images.unsplash.com/photo-1521737604893-d14cc237f11d?q=80&w=2684&auto=format&fit=crop' },
+const UPCOMING_EVENTS: (Event & { type: string, description?: string, tag?: string })[] = [
+  { id: '1', title: 'Mid-Week Deep Dive', date: '2023-10-18', time: '7:00 PM - 8:30 PM', location: 'Fellowship Hall B', category: 'Bible Study', type: 'Bible Study', image: 'https://images.unsplash.com/photo-1491841550275-ad7854e35ca6?q=80&w=2574&auto=format&fit=crop', tag: 'BIBLE STUDY' },
+  { id: '2', title: 'Friday Fire Night', date: '2023-10-20', time: '6:30 PM - 9:00 PM', location: 'Youth Center', category: 'Youth', type: 'Youth', image: 'https://images.unsplash.com/photo-1529070538774-1843cb3265df?q=80&w=2670&auto=format&fit=crop', tag: 'YOUTH' },
+  { id: '3', title: 'Community Food Drive', date: '2023-10-22', time: '1:00 PM - 4:00 PM', location: 'City Park / Main Entrance', category: 'Outreach', type: 'Outreach', image: 'https://images.unsplash.com/photo-1593113598332-cd288d649433?q=80&w=2670&auto=format&fit=crop', tag: 'OUTREACH' },
+  { id: '4', title: 'Sunday Celebration', date: '2023-10-27', time: '09:00 AM & 11:30 AM', location: 'Main Sanctuary', category: 'Service', type: 'Service', image: 'https://images.unsplash.com/photo-1438232992991-995b7058bbb3?q=80&w=2673&auto=format&fit=crop', tag: 'SERVICE' },
+  { id: '5', title: 'Volunteers Training', date: '2023-10-28', time: '7:00 PM - 8:30 PM', location: 'Conference Room A', category: 'Leadership', type: 'Leadership', image: 'https://images.unsplash.com/photo-1521737604893-d14cc237f11d?q=80&w=2684&auto=format&fit=crop', tag: 'LEADERSHIP' },
 ];
 
 const RECENT_UPDATES = [
@@ -48,7 +48,7 @@ const LATEST_SERMONS = [
 ];
 
 // --- MOCK DATA FOR MINISTRIES ---
-const MINISTRY_CATEGORIES = ["All", "Kids & Youth", "Men", "Women", "Outreach", "Creative Arts"];
+const MINISTRY_CATEGORIES = ["All Ministries", "Kids & Youth", "Men", "Women", "Outreach", "Creative Arts"];
 
 const MINISTRIES_DATA = [
   {
@@ -57,7 +57,8 @@ const MINISTRIES_DATA = [
     category: "Creative Arts",
     image: "https://images.unsplash.com/photo-1516280440614-6697288d5d38?q=80&w=2670&auto=format&fit=crop",
     description: "Lead the congregation in praise and worship through music, vocals, and technical excellence.",
-    leader: { name: "Pastor David", avatar: "https://i.pravatar.cc/150?u=david" }
+    leader: { name: "Pastor David", avatar: "https://i.pravatar.cc/150?u=david" },
+    leader2: { name: "Sarah J.", avatar: "https://i.pravatar.cc/150?u=sarah" }
   },
   {
     id: 2,
@@ -73,7 +74,7 @@ const MINISTRIES_DATA = [
     category: "Kids & Youth",
     image: "https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?q=80&w=2670&auto=format&fit=crop",
     description: "Nurture the next generation in faith through engaging Bible stories, crafts, and fun activities.",
-    leader: { name: "Teacher Sarah", avatar: "https://i.pravatar.cc/150?u=sarah" }
+    leader: { name: "Teacher Sarah", avatar: "https://i.pravatar.cc/150?u=sarah_t" }
   },
 ];
 
@@ -81,7 +82,7 @@ const CELL_GROUPS_DATA = [
   {
     id: 1,
     name: "Northside Fellowship",
-    schedule: "Meets Tuesdays @ 7:00 PM",
+    schedule: "Meets Tuesdays @ 7:00 PM • The Johnson Home",
     location: "The Johnson Home",
     distance: "2.3 miles away",
     status: "Open",
@@ -91,7 +92,7 @@ const CELL_GROUPS_DATA = [
   {
     id: 2,
     name: "Young Adults Connect",
-    schedule: "Meets Thursdays @ 6:30 PM",
+    schedule: "Meets Thursdays @ 6:30 PM • Coffee Shop",
     location: "Coffee Shop",
     distance: "4.1 miles away",
     status: "Open",
@@ -193,7 +194,7 @@ export const Landing: React.FC = () => {
                   <p className="text-accent-red font-bold text-xs uppercase tracking-widest mb-2">Join us online or in-person</p>
                   <h2 className="text-3xl md:text-4xl font-black text-slate-900 dark:text-white">Sunday Service Highlights</h2>
               </div>
-              <Link to="/sermons" className="hidden md:flex text-primary font-bold text-sm items-center gap-1 hover:gap-2 transition-all">
+              <Link to="/sermons" className="hidden md:flex text-primary dark:text-[#8b8bac] font-bold text-sm items-center gap-1 hover:gap-2 transition-all">
                   Watch Past Services <span className="material-symbols-outlined text-sm">arrow_forward</span>
               </Link>
           </div>
@@ -236,7 +237,7 @@ export const Landing: React.FC = () => {
                       <p className="text-accent-red font-bold text-xs uppercase tracking-widest mb-2">Word of God</p>
                       <h2 className="text-3xl md:text-4xl font-black text-slate-900 dark:text-white">Recent Sermons</h2>
                   </div>
-                  <Link to="/sermons" className="text-primary font-bold text-sm flex items-center gap-1 hover:gap-2 transition-all">
+                  <Link to="/sermons" className="text-primary dark:text-[#8b8bac] font-bold text-sm flex items-center gap-1 hover:gap-2 transition-all">
                       View All Sermons <span className="material-symbols-outlined text-sm">arrow_forward</span>
                   </Link>
               </div>
@@ -323,7 +324,7 @@ export const Landing: React.FC = () => {
                       <div className="w-full bg-gray-100 rounded-full h-2 mb-4"><div className="bg-yellow-500 h-2 rounded-full w-[45%]"></div></div>
                       <div className="flex justify-between items-center">
                           <span className="text-xs font-bold text-slate-900 dark:text-white">KES 450k / 1M</span>
-                          <button className="text-primary font-bold text-sm border border-primary px-4 py-2 rounded-lg hover:bg-primary hover:text-white transition">Give Now</button>
+                          <button className="text-primary dark:text-white font-bold text-sm border border-primary dark:border-white px-4 py-2 rounded-lg hover:bg-primary hover:text-white dark:hover:bg-white dark:hover:text-primary transition">Give Now</button>
                       </div>
                  </div>
                  <div className="bg-white dark:bg-slate-800 p-8 rounded-3xl border border-gray-100 dark:border-gray-700 shadow-sm flex flex-col">
@@ -333,7 +334,7 @@ export const Landing: React.FC = () => {
                       <div className="w-full bg-gray-100 rounded-full h-2 mb-4"><div className="bg-purple-500 h-2 rounded-full w-[80%]"></div></div>
                       <div className="flex justify-between items-center">
                           <span className="text-xs font-bold text-slate-900 dark:text-white">KES 800k / 1M</span>
-                          <button className="text-primary font-bold text-sm border border-primary px-4 py-2 rounded-lg hover:bg-primary hover:text-white transition">Give Now</button>
+                          <button className="text-primary dark:text-white font-bold text-sm border border-primary dark:border-white px-4 py-2 rounded-lg hover:bg-primary hover:text-white dark:hover:bg-white dark:hover:text-primary transition">Give Now</button>
                       </div>
                  </div>
             </div>
@@ -395,7 +396,7 @@ export const Landing: React.FC = () => {
                       <p className="text-xs font-bold text-gray-400 mb-2 uppercase tracking-wide">May 24, 2024</p>
                       <h3 className="text-xl font-bold text-slate-900 dark:text-white mb-2 group-hover:text-primary transition-colors">{update.title}</h3>
                       <p className="text-sm text-gray-500 line-clamp-2 mb-4">{update.excerpt}</p>
-                      <button className="text-primary font-bold text-sm flex items-center gap-1 hover:gap-2 transition-all">
+                      <button className="text-primary dark:text-[#8b8bac] font-bold text-sm flex items-center gap-1 hover:gap-2 transition-all">
                           Read More <span className="material-symbols-outlined text-sm">arrow_forward</span>
                       </button>
                   </div>
@@ -466,633 +467,838 @@ export const Landing: React.FC = () => {
 };
 
 export const Auth: React.FC<AuthProps> = ({ setRole }) => {
-    const navigate = useNavigate();
-    const [isLogin, setIsLogin] = useState(true);
-    const [method, setMethod] = useState<'email' | 'phone'>('email');
+  const navigate = useNavigate();
+  const [isLogin, setIsLogin] = useState(true);
 
-    const handleAuth = (e: React.FormEvent) => {
-        e.preventDefault();
-        // Simulate auth
-        setRole(UserRole.MEMBER);
-        navigate('/dashboard');
-    };
-
-    return (
-        <div className="min-h-screen flex items-center justify-center bg-gray-50 dark:bg-slate-900 py-12 px-4 sm:px-6 lg:px-8 font-sans">
-             <div className="max-w-md w-full space-y-8 bg-white dark:bg-slate-800 p-8 rounded-2xl shadow-xl border border-gray-100 dark:border-gray-700">
-                 <div className="text-center">
-                     <div className="mx-auto size-16 bg-primary text-white rounded-xl flex items-center justify-center shadow-lg shadow-blue-500/30 mb-4">
-                         <span className="material-symbols-outlined text-4xl">church</span>
-                     </div>
-                     <h2 className="text-3xl font-black text-slate-900 dark:text-white">
-                         {isLogin ? 'Welcome Back' : 'Join Our Family'}
-                     </h2>
-                     <p className="mt-2 text-sm text-gray-600 dark:text-gray-400">
-                         {isLogin ? 'Sign in to access your dashboard' : 'Create an account to get started'}
-                     </p>
-                 </div>
-
-                 <div className="flex bg-gray-100 dark:bg-slate-700 p-1 rounded-lg">
-                     <button 
-                        onClick={() => setMethod('email')}
-                        className={`flex-1 py-2 text-sm font-bold rounded-md transition ${method === 'email' ? 'bg-white dark:bg-slate-600 text-slate-900 dark:text-white shadow-sm' : 'text-gray-500 hover:text-gray-700'}`}
-                     >
-                         Email
-                     </button>
-                     <button 
-                        onClick={() => setMethod('phone')}
-                        className={`flex-1 py-2 text-sm font-bold rounded-md transition ${method === 'phone' ? 'bg-white dark:bg-slate-600 text-slate-900 dark:text-white shadow-sm' : 'text-gray-500 hover:text-gray-700'}`}
-                     >
-                         Phone
-                     </button>
-                 </div>
-
-                 <form className="mt-8 space-y-6" onSubmit={handleAuth}>
-                     <div className="rounded-md shadow-sm -space-y-px">
-                         {method === 'email' ? (
-                             <div>
-                                 <label className="sr-only">Email address</label>
-                                 <input type="email" required className="appearance-none rounded-none relative block w-full px-3 py-3 border border-gray-300 dark:border-gray-600 placeholder-gray-500 text-slate-900 dark:text-white rounded-t-md focus:outline-none focus:ring-primary focus:border-primary focus:z-10 sm:text-sm dark:bg-slate-900" placeholder="Email address" />
-                             </div>
-                         ) : (
-                             <div>
-                                 <label className="sr-only">Phone Number</label>
-                                 <input type="tel" required className="appearance-none rounded-none relative block w-full px-3 py-3 border border-gray-300 dark:border-gray-600 placeholder-gray-500 text-slate-900 dark:text-white rounded-t-md focus:outline-none focus:ring-primary focus:border-primary focus:z-10 sm:text-sm dark:bg-slate-900" placeholder="+254 7XX XXX XXX" />
-                             </div>
-                         )}
-                         <div>
-                             <label className="sr-only">Password</label>
-                             <input type="password" required className="appearance-none rounded-none relative block w-full px-3 py-3 border border-gray-300 dark:border-gray-600 placeholder-gray-500 text-slate-900 dark:text-white rounded-b-md focus:outline-none focus:ring-primary focus:border-primary focus:z-10 sm:text-sm dark:bg-slate-900" placeholder="Password" />
-                         </div>
-                     </div>
-
-                     <div className="flex items-center justify-between">
-                         <div className="flex items-center">
-                             <input id="remember-me" name="remember-me" type="checkbox" className="h-4 w-4 text-primary focus:ring-primary border-gray-300 rounded" />
-                             <label htmlFor="remember-me" className="ml-2 block text-sm text-gray-900 dark:text-gray-300">Remember me</label>
-                         </div>
-                         <div className="text-sm">
-                             <a href="#" className="font-medium text-primary hover:text-blue-500">Forgot password?</a>
-                         </div>
-                     </div>
-
-                     <div>
-                         <button type="submit" className="group relative w-full flex justify-center py-3 px-4 border border-transparent text-sm font-bold rounded-xl text-white bg-primary hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary shadow-lg shadow-blue-500/30 transition transform hover:-translate-y-0.5">
-                             {isLogin ? 'Sign in' : 'Register'}
-                         </button>
-                     </div>
-                 </form>
-
-                 <div className="text-center">
-                     <p className="text-sm text-gray-600 dark:text-gray-400">
-                         {isLogin ? "Don't have an account? " : "Already have an account? "}
-                         <button onClick={() => setIsLogin(!isLogin)} className="font-bold text-primary hover:text-blue-500">
-                             {isLogin ? 'Sign up' : 'Sign in'}
-                         </button>
-                     </p>
-                 </div>
-                 
-                 <div className="mt-6 text-center">
-                     <button onClick={() => { setRole(UserRole.ADMIN); navigate('/admin'); }} className="text-xs text-gray-400 hover:text-gray-600 underline">
-                         Demo: Login as Admin
-                     </button>
-                 </div>
-             </div>
-        </div>
-    );
-};
-
-export const Contact: React.FC = () => {
-    return (
-        <div className="bg-background-light dark:bg-background-dark min-h-screen py-20 px-4 md:px-8 font-sans">
-             <div className="max-w-7xl mx-auto">
-                 <div className="text-center mb-16">
-                     <p className="text-accent-red font-bold text-xs uppercase tracking-widest mb-2">Get in Touch</p>
-                     <h1 className="text-4xl md:text-5xl font-black text-slate-900 dark:text-white mb-4">We'd Love to Hear From You</h1>
-                     <p className="text-gray-500 text-lg max-w-2xl mx-auto">Whether you have a question, a prayer request, or just want to say hello, we are here for you.</p>
-                 </div>
-
-                 <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-16">
-                      <div className="bg-white dark:bg-slate-800 p-8 rounded-3xl shadow-sm border border-gray-100 dark:border-gray-700 text-center">
-                          <div className="size-14 bg-blue-50 dark:bg-blue-900/20 text-primary rounded-2xl flex items-center justify-center mx-auto mb-6">
-                              <span className="material-symbols-outlined text-3xl">location_on</span>
-                          </div>
-                          <h3 className="text-xl font-bold text-slate-900 dark:text-white mb-2">Visit Us</h3>
-                          <p className="text-gray-500 leading-relaxed">Kibabii Diploma Road,<br/>Adjacent to Marell Academy,<br/>Bungoma, Kenya</p>
-                      </div>
-                      <div className="bg-white dark:bg-slate-800 p-8 rounded-3xl shadow-sm border border-gray-100 dark:border-gray-700 text-center">
-                          <div className="size-14 bg-green-50 dark:bg-green-900/20 text-green-600 rounded-2xl flex items-center justify-center mx-auto mb-6">
-                              <span className="material-symbols-outlined text-3xl">call</span>
-                          </div>
-                          <h3 className="text-xl font-bold text-slate-900 dark:text-white mb-2">Call Us</h3>
-                          <p className="text-gray-500 mb-2">Mon-Fri from 8am to 5pm</p>
-                          <a href="tel:+254759277874" className="text-lg font-black text-slate-900 dark:text-white hover:text-primary transition">+254 759 277 874</a>
-                      </div>
-                      <div className="bg-white dark:bg-slate-800 p-8 rounded-3xl shadow-sm border border-gray-100 dark:border-gray-700 text-center">
-                          <div className="size-14 bg-purple-50 dark:bg-purple-900/20 text-purple-600 rounded-2xl flex items-center justify-center mx-auto mb-6">
-                              <span className="material-symbols-outlined text-3xl">mail</span>
-                          </div>
-                          <h3 className="text-xl font-bold text-slate-900 dark:text-white mb-2">Email Us</h3>
-                          <p className="text-gray-500 mb-2">For general inquiries</p>
-                          <a href="mailto:cacchurchbg@gmail.com" className="text-lg font-black text-slate-900 dark:text-white hover:text-primary transition">cacchurchbg@gmail.com</a>
-                      </div>
-                 </div>
-
-                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
-                     {/* Map */}
-                     <div className="h-[500px] bg-gray-200 rounded-3xl overflow-hidden relative shadow-lg">
-                        <iframe 
-                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3989.817951633519!2d34.55837617496664!3d0.5562779994384065!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x17803f005c10590b%3A0xc3f8e58983870632!2sChrist&#39;s%20Ambassadors%20Celebration%20Centre!5e0!3m2!1sen!2ske!4v1700000000000!5m2!1sen!2ske" 
-                            width="100%" 
-                            height="100%" 
-                            style={{border:0}} 
-                            allowFullScreen={true} 
-                            loading="lazy" 
-                            referrerPolicy="no-referrer-when-downgrade"
-                            className="absolute inset-0"
-                        ></iframe>
-                     </div>
-
-                     {/* Form */}
-                     <div className="bg-white dark:bg-slate-800 p-8 md:p-12 rounded-3xl shadow-lg border border-gray-100 dark:border-gray-700">
-                         <h3 className="text-2xl font-black text-slate-900 dark:text-white mb-6">Send us a Message</h3>
-                         <form className="space-y-6">
-                             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                                 <div>
-                                     <label className="block text-xs font-bold text-gray-500 uppercase mb-2">Name</label>
-                                     <input type="text" className="w-full px-4 py-3 rounded-xl bg-gray-50 dark:bg-slate-900 border border-gray-200 dark:border-gray-700 focus:ring-2 focus:ring-primary outline-none dark:text-white" placeholder="John Doe" />
-                                 </div>
-                                 <div>
-                                     <label className="block text-xs font-bold text-gray-500 uppercase mb-2">Email</label>
-                                     <input type="email" className="w-full px-4 py-3 rounded-xl bg-gray-50 dark:bg-slate-900 border border-gray-200 dark:border-gray-700 focus:ring-2 focus:ring-primary outline-none dark:text-white" placeholder="john@example.com" />
-                                 </div>
-                             </div>
-                             <div>
-                                 <label className="block text-xs font-bold text-gray-500 uppercase mb-2">Subject</label>
-                                 <select className="w-full px-4 py-3 rounded-xl bg-gray-50 dark:bg-slate-900 border border-gray-200 dark:border-gray-700 focus:ring-2 focus:ring-primary outline-none dark:text-white">
-                                     <option>General Inquiry</option>
-                                     <option>Prayer Request</option>
-                                     <option>Membership</option>
-                                     <option>Counseling</option>
-                                 </select>
-                             </div>
-                             <div>
-                                 <label className="block text-xs font-bold text-gray-500 uppercase mb-2">Message</label>
-                                 <textarea rows={5} className="w-full px-4 py-3 rounded-xl bg-gray-50 dark:bg-slate-900 border border-gray-200 dark:border-gray-700 focus:ring-2 focus:ring-primary outline-none dark:text-white resize-none" placeholder="How can we help you?"></textarea>
-                             </div>
-                             <button type="submit" className="w-full py-4 bg-primary hover:bg-primary-dark text-white font-bold rounded-xl shadow-lg shadow-blue-500/30 transition transform hover:-translate-y-1">
-                                 Send Message
-                             </button>
-                         </form>
-                     </div>
-                 </div>
-
-                 {/* FAQs */}
-                 <div className="mt-20 max-w-4xl mx-auto">
-                     <h3 className="text-2xl font-black text-slate-900 dark:text-white mb-8 text-center">Frequently Asked Questions</h3>
-                     <div className="space-y-4">
-                         {[
-                             { q: "What time are your services?", a: "Our Sunday services are at 9:00 AM and 11:00 AM. We also have a mid-week service on Wednesdays at 6:30 PM." },
-                             { q: "Where are you located?", a: "We are located along Kibabii Diploma Road, adjacent to Marell Academy in Bungoma, Kenya." },
-                             { q: "Do you have a children's ministry?", a: "Yes! We have a vibrant Children's Church that runs concurrently with our main services, catering to ages 4-12." },
-                             { q: "How can I join a cell group?", a: "You can join a cell group by visiting the 'Ministries' page on our website or contacting our church office." }
-                         ].map((faq, i) => (
-                             <div key={i} className="bg-white dark:bg-slate-800 p-6 rounded-2xl border border-gray-100 dark:border-gray-700">
-                                 <h4 className="font-bold text-slate-900 dark:text-white mb-2">{faq.q}</h4>
-                                 <p className="text-gray-600 dark:text-gray-300 text-sm leading-relaxed">{faq.a}</p>
-                             </div>
-                         ))}
-                     </div>
-                 </div>
-             </div>
-        </div>
-    );
-};
-
-export const Ministries: React.FC = () => {
-  const [selectedCategory, setSelectedCategory] = useState("All");
-
-  const filteredMinistries = selectedCategory === "All" 
-    ? MINISTRIES_DATA 
-    : MINISTRIES_DATA.filter(m => m.category === selectedCategory);
+  const handleAuth = (role: UserRole) => {
+    setRole(role);
+    if (role === UserRole.ADMIN) navigate('/admin');
+    else navigate('/dashboard');
+  };
 
   return (
-    <div className="bg-gray-50 dark:bg-slate-900 min-h-screen font-sans pb-20">
-      {/* Hero */}
-      <div className="bg-primary text-white py-20 px-4 text-center relative overflow-hidden">
-         <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-10"></div>
-         <div className="relative z-10 max-w-3xl mx-auto">
-            <h1 className="text-4xl md:text-5xl font-black mb-4">Serve & Connect</h1>
-            <p className="text-xl text-blue-100">"As each has received a gift, use it to serve one another, as good stewards of God's varied grace." - 1 Peter 4:10</p>
-         </div>
-      </div>
-
-      <div className="max-w-7xl mx-auto px-4 md:px-8 -mt-8 relative z-20">
-         {/* Filters */}
-         <div className="bg-white dark:bg-slate-800 p-2 rounded-xl shadow-lg border border-gray-100 dark:border-gray-700 flex flex-wrap justify-center gap-2 mb-12 w-fit mx-auto">
-             {MINISTRY_CATEGORIES.map(cat => (
-                 <button 
-                    key={cat}
-                    onClick={() => setSelectedCategory(cat)}
-                    className={`px-4 py-2 rounded-lg text-sm font-bold transition ${selectedCategory === cat ? 'bg-primary text-white shadow-md' : 'text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-slate-700'}`}
-                 >
-                     {cat}
-                 </button>
-             ))}
-         </div>
-
-         {/* Ministries Grid */}
-         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-20">
-             {filteredMinistries.map(ministry => (
-                 <div key={ministry.id} className="bg-white dark:bg-slate-800 rounded-2xl overflow-hidden shadow-md hover:shadow-xl transition-shadow border border-gray-100 dark:border-gray-700 flex flex-col">
-                     <div className="h-48 overflow-hidden">
-                         <img src={ministry.image} className="w-full h-full object-cover hover:scale-105 transition-transform duration-500" alt={ministry.title} />
-                     </div>
-                     <div className="p-6 flex-1 flex flex-col">
-                         <div className="flex justify-between items-start mb-2">
-                             <h3 className="text-xl font-bold text-slate-900 dark:text-white">{ministry.title}</h3>
-                             <span className="bg-blue-50 dark:bg-blue-900/30 text-primary text-[10px] font-bold px-2 py-1 rounded uppercase tracking-wide">{ministry.category}</span>
-                         </div>
-                         <p className="text-gray-500 dark:text-gray-400 text-sm leading-relaxed mb-6 flex-1">{ministry.description}</p>
-                         
-                         <div className="flex items-center gap-3 mb-6">
-                             <img src={ministry.leader.avatar} className="size-10 rounded-full border-2 border-white dark:border-slate-700 shadow-sm" alt={ministry.leader.name} />
-                             <div>
-                                 <p className="text-xs font-bold text-slate-900 dark:text-white">{ministry.leader.name}</p>
-                                 <p className="text-[10px] text-gray-400 uppercase font-bold">Leader</p>
-                             </div>
-                         </div>
-
-                         <button className="w-full py-3 bg-gray-50 dark:bg-slate-700 text-slate-700 dark:text-white font-bold rounded-xl hover:bg-primary hover:text-white transition shadow-sm border border-gray-200 dark:border-gray-600 border-b-4 active:border-b-0 active:translate-y-1">
-                             Join Ministry
-                         </button>
-                     </div>
-                 </div>
-             ))}
-         </div>
-
-         {/* Cell Groups */}
-         <div className="bg-white dark:bg-slate-800 rounded-3xl p-8 md:p-12 shadow-sm border border-gray-100 dark:border-gray-700">
-             <div className="text-center mb-10">
-                 <h2 className="text-3xl font-black text-slate-900 dark:text-white mb-3">Cell Groups</h2>
-                 <p className="text-gray-500 dark:text-gray-400 max-w-2xl mx-auto">Connect with believers near you for fellowship, bible study, and prayer in a smaller, intimate setting.</p>
+    <div className="min-h-screen flex items-center justify-center bg-gray-50 dark:bg-slate-900 px-4">
+      <div className="max-w-md w-full bg-white dark:bg-slate-800 rounded-2xl shadow-xl p-8 border border-gray-100 dark:border-gray-700">
+         <div className="text-center mb-8">
+             <div className="size-12 bg-primary text-white rounded-lg flex items-center justify-center mx-auto mb-4">
+                 <span className="material-symbols-outlined text-2xl">church</span>
              </div>
-
-             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                 {CELL_GROUPS_DATA.map(group => (
-                     <div key={group.id} className="border border-gray-200 dark:border-gray-700 rounded-2xl p-6 flex gap-4 hover:border-primary transition group cursor-pointer bg-gray-50 dark:bg-slate-900/50">
-                         <div className="size-14 bg-white dark:bg-slate-800 rounded-xl flex items-center justify-center text-primary shadow-sm shrink-0 group-hover:scale-110 transition-transform">
-                             <span className="material-symbols-outlined text-3xl">{group.icon}</span>
-                         </div>
-                         <div className="flex-1">
-                             <div className="flex justify-between items-start mb-1">
-                                 <h4 className="font-bold text-lg text-slate-900 dark:text-white group-hover:text-primary transition-colors">{group.name}</h4>
-                                 <span className="text-[10px] font-bold bg-green-100 text-green-700 px-2 py-0.5 rounded uppercase">{group.status}</span>
-                             </div>
-                             <p className="text-sm text-gray-500 mb-2">{group.type} • {group.distance}</p>
-                             <div className="text-xs font-bold text-slate-600 dark:text-slate-400 flex flex-col gap-1">
-                                 <span className="flex items-center gap-1"><span className="material-symbols-outlined text-sm">event</span> {group.schedule}</span>
-                                 <span className="flex items-center gap-1"><span className="material-symbols-outlined text-sm">location_on</span> {group.location}</span>
-                             </div>
-                         </div>
-                         <div className="flex items-center">
-                             <span className="material-symbols-outlined text-gray-300 group-hover:text-primary transition">chevron_right</span>
-                         </div>
-                     </div>
-                 ))}
-             </div>
-             
-             <div className="mt-10 text-center">
-                 <button className="px-8 py-3 bg-primary text-white font-bold rounded-full shadow-lg shadow-blue-500/30 hover:bg-primary-dark transition">Find a Group Near Me</button>
-             </div>
+             <h2 className="text-2xl font-black text-slate-900 dark:text-white">{isLogin ? 'Welcome Back' : 'Join Our Family'}</h2>
+             <p className="text-gray-500 text-sm mt-2">Sign in to access your dashboard and resources.</p>
+         </div>
+         
+         <div className="space-y-4">
+             <button onClick={() => handleAuth(UserRole.MEMBER)} className="w-full py-3 bg-primary hover:bg-primary-dark text-white font-bold rounded-xl transition shadow-lg shadow-blue-500/20">
+                 {isLogin ? 'Sign In as Member' : 'Register as Member'}
+             </button>
+             <button onClick={() => handleAuth(UserRole.ADMIN)} className="w-full py-3 bg-slate-800 hover:bg-slate-900 text-white font-bold rounded-xl transition">
+                 Admin Access
+             </button>
+             <button onClick={() => setIsLogin(!isLogin)} className="w-full py-2 text-sm text-gray-500 font-bold hover:text-primary transition">
+                 {isLogin ? 'New here? Create account' : 'Already have an account? Login'}
+             </button>
          </div>
       </div>
     </div>
   );
 };
 
+export const Contact: React.FC = () => {
+    const [openFaq, setOpenFaq] = useState<number | null>(0);
+
+    const faqs = [
+        { q: "What time are your Sunday services?", a: "We have two services on Sundays: the First Service at 9:00 AM and the Second Service at 11:30 AM. Each service is filled with worship, prayer, and word." },
+        { q: "Do you have parking spaces?", a: "Yes, we have ample parking space within our compound. Our ushers and security team will guide you on where to park when you arrive." },
+        { q: "How can I join a cell group?", a: "You can find a cell group near you by visiting our Ministries page or contacting the church office. We have many Berean families across Bungoma and beyond." },
+        { q: "Is there a children's ministry?", a: "Absolutely! We have a vibrant Children's Church (CACC Kids) that runs concurrently with both Sunday services, catering to children of all ages." }
+    ];
+
+    return (
+      <div className="bg-background-off dark:bg-background-dark font-sans flex flex-col min-h-screen">
+          {/* Header Section */}
+          <section className="bg-primary dark:bg-slate-900 pt-32 pb-40 px-4 text-center text-white relative overflow-hidden">
+               <div className="absolute top-0 left-0 w-full h-full opacity-10 pointer-events-none">
+                    <div className="absolute top-10 left-10 size-64 bg-white rounded-full blur-[100px]"></div>
+                    <div className="absolute bottom-10 right-10 size-96 bg-red-600 rounded-full blur-[120px]"></div>
+               </div>
+               <div className="relative z-10 max-w-4xl mx-auto">
+                    <span className="bg-white/10 backdrop-blur-md px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-widest border border-white/20 mb-6 inline-block">
+                         CONNECT WITH US
+                    </span>
+                    <h1 className="text-4xl md:text-6xl font-black mb-6 leading-tight">We'd Love to Hear From You</h1>
+                    <p className="text-blue-100 text-lg md:text-xl font-medium max-w-2xl mx-auto leading-relaxed italic opacity-90">
+                         Whether you have a prayer request, a question about our services, or want to join a cell group, our team is here to serve you with the love of Christ.
+                    </p>
+               </div>
+          </section>
+
+          {/* Main Contact Area */}
+          <section className="px-4 md:px-8 -mt-24 relative z-20 pb-20">
+               <div className="max-w-7xl mx-auto flex flex-col lg:flex-row gap-8">
+                    {/* Left: Contact Info & Branches */}
+                    <div className="lg:w-[380px] shrink-0 space-y-6">
+                         {/* Contact Details Card */}
+                         <div className="bg-white dark:bg-slate-800 p-8 rounded-[2.5rem] shadow-xl shadow-slate-200/50 dark:shadow-none border border-gray-100 dark:border-gray-700">
+                              <h3 className="text-lg font-black text-slate-900 dark:text-white mb-8">Contact Details</h3>
+                              <div className="space-y-8">
+                                   <div className="flex gap-4">
+                                        <div className="size-10 rounded-xl bg-blue-50 dark:bg-blue-900/20 text-primary flex items-center justify-center shrink-0">
+                                             <span className="material-symbols-outlined text-lg filled">location_on</span>
+                                        </div>
+                                        <div>
+                                             <p className="text-[10px] font-black text-gray-400 uppercase tracking-widest mb-1">HEADQUARTERS</p>
+                                             <p className="text-sm font-bold text-slate-700 dark:text-gray-300 leading-relaxed">Kibabii Diploma Road, Adjacent to Marell Academy, Bungoma, Kenya</p>
+                                        </div>
+                                   </div>
+                                   <div className="flex gap-4">
+                                        <div className="size-10 rounded-xl bg-blue-50 dark:bg-blue-900/20 text-primary flex items-center justify-center shrink-0">
+                                             <span className="material-symbols-outlined text-lg filled">call</span>
+                                        </div>
+                                        <div>
+                                             <p className="text-[10px] font-black text-gray-400 uppercase tracking-widest mb-1">CALL US</p>
+                                             <p className="text-sm font-bold text-slate-700 dark:text-gray-300">+254 759 277 874</p>
+                                        </div>
+                                   </div>
+                                   <div className="flex gap-4">
+                                        <div className="size-10 rounded-xl bg-blue-50 dark:bg-blue-900/20 text-primary flex items-center justify-center shrink-0">
+                                             <span className="material-symbols-outlined text-lg filled">mail</span>
+                                        </div>
+                                        <div>
+                                             <p className="text-[10px] font-black text-gray-400 uppercase tracking-widest mb-1">EMAIL US</p>
+                                             <p className="text-sm font-bold text-slate-700 dark:text-gray-300">cacchurchbg@gmail.com</p>
+                                        </div>
+                                   </div>
+                              </div>
+                              <div className="mt-10 pt-8 border-t border-gray-50 dark:border-gray-700">
+                                   <p className="text-[10px] font-black text-gray-400 uppercase tracking-widest mb-4">Social Media</p>
+                                   <div className="flex gap-3">
+                                        <a href="#" className="size-10 rounded-full bg-gray-50 dark:bg-slate-700 flex items-center justify-center text-slate-400 hover:text-primary transition-colors border border-gray-100 dark:border-gray-600"><span className="material-symbols-outlined text-lg">public</span></a>
+                                        <a href="#" className="flex-1 px-4 py-2 bg-gray-50 dark:bg-slate-700 rounded-full text-xs font-bold text-slate-600 dark:text-gray-300 flex items-center gap-2 border border-gray-100 dark:border-gray-600">@cacchurchbg</a>
+                                   </div>
+                              </div>
+                         </div>
+
+                         {/* Branches Card */}
+                         <div className="bg-white dark:bg-slate-800 p-8 rounded-[2.5rem] shadow-xl shadow-slate-200/50 dark:shadow-none border border-gray-100 dark:border-gray-700">
+                              <div className="flex items-center gap-2 mb-8">
+                                   <div className="size-8 rounded-lg bg-red-50 text-accent-red flex items-center justify-center"><span className="material-symbols-outlined text-sm filled">church</span></div>
+                                   <h3 className="text-lg font-black text-slate-900 dark:text-white">Our Branches</h3>
+                              </div>
+                              <div className="space-y-3">
+                                   {['Nairobi', 'Bungoma (HQ)', 'Nyandarua', 'Busia', 'Kakamega'].map(branch => (
+                                        <div key={branch} className={`p-4 rounded-2xl flex items-center justify-between text-sm font-bold transition-all ${branch.includes('HQ') ? 'bg-primary/5 text-primary border border-primary/10' : 'text-slate-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-slate-700'}`}>
+                                             <div className="flex items-center gap-3">
+                                                  <span className={`material-symbols-outlined text-xs ${branch.includes('HQ') ? 'filled text-primary' : 'text-red-500'}`}>fiber_manual_record</span>
+                                                  {branch}
+                                             </div>
+                                             {branch.includes('HQ') && <span className="material-symbols-outlined text-sm">chevron_right</span>}
+                                        </div>
+                                   ))}
+                              </div>
+                         </div>
+                    </div>
+
+                    {/* Right: Message Form */}
+                    <div className="flex-1 bg-white dark:bg-slate-800 p-8 md:p-12 rounded-[2.5rem] shadow-xl shadow-slate-200/50 dark:shadow-none border border-gray-100 dark:border-gray-700">
+                         <div className="mb-10">
+                              <h3 className="text-2xl font-black text-slate-900 dark:text-white mb-2">Send us a Message</h3>
+                              <p className="text-sm font-bold text-gray-400 flex items-center gap-2 uppercase tracking-widest"><span className="material-symbols-outlined text-green-500 text-sm filled">schedule</span> We typically reply within 24 hours.</p>
+                         </div>
+                         
+                         <form className="space-y-6">
+                              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                   <div>
+                                        <label className="block text-[10px] font-black text-gray-400 uppercase tracking-widest mb-2">FIRST NAME</label>
+                                        <input type="text" placeholder="e.g. John" className="w-full bg-gray-50 dark:bg-slate-900 border-none rounded-xl py-4 px-6 text-sm font-bold text-slate-900 dark:text-white focus:ring-1 focus:ring-primary shadow-inner" />
+                                   </div>
+                                   <div>
+                                        <label className="block text-[10px] font-black text-gray-400 uppercase tracking-widest mb-2">LAST NAME</label>
+                                        <input type="text" placeholder="e.g. Doe" className="w-full bg-gray-50 dark:bg-slate-900 border-none rounded-xl py-4 px-6 text-sm font-bold text-slate-900 dark:text-white focus:ring-1 focus:ring-primary shadow-inner" />
+                                   </div>
+                              </div>
+                              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                   <div>
+                                        <label className="block text-[10px] font-black text-gray-400 uppercase tracking-widest mb-2">EMAIL ADDRESS</label>
+                                        <input type="email" placeholder="john@example.com" className="w-full bg-gray-50 dark:bg-slate-900 border-none rounded-xl py-4 px-6 text-sm font-bold text-slate-900 dark:text-white focus:ring-1 focus:ring-primary shadow-inner" />
+                                   </div>
+                                   <div>
+                                        <label className="block text-[10px] font-black text-gray-400 uppercase tracking-widest mb-2">PHONE NUMBER</label>
+                                        <input type="text" placeholder="+254..." className="w-full bg-gray-50 dark:bg-slate-900 border-none rounded-xl py-4 px-6 text-sm font-bold text-slate-900 dark:text-white focus:ring-1 focus:ring-primary shadow-inner" />
+                                   </div>
+                              </div>
+                              <div>
+                                   <label className="block text-[10px] font-black text-gray-400 uppercase tracking-widest mb-2">SUBJECT</label>
+                                   <div className="relative">
+                                        <select className="w-full bg-gray-50 dark:bg-slate-900 border-none rounded-xl py-4 pl-6 pr-12 text-sm font-bold text-slate-900 dark:text-white focus:ring-1 focus:ring-primary shadow-inner appearance-none">
+                                             <option>General Inquiry</option>
+                                             <option>Prayer Request</option>
+                                             <option>Membership</option>
+                                             <option>Giving / Donations</option>
+                                        </select>
+                                        <span className="material-symbols-outlined absolute right-4 top-1/2 -translate-y-1/2 text-gray-400 pointer-events-none">expand_more</span>
+                                   </div>
+                              </div>
+                              <div>
+                                   <label className="block text-[10px] font-black text-gray-400 uppercase tracking-widest mb-2">MESSAGE</label>
+                                   <textarea rows={6} placeholder="How can we help you today?" className="w-full bg-gray-50 dark:bg-slate-900 border-none rounded-xl py-4 px-6 text-sm font-bold text-slate-900 dark:text-white focus:ring-1 focus:ring-primary shadow-inner resize-none"></textarea>
+                              </div>
+
+                              <div className="flex flex-col md:flex-row items-center justify-between gap-6 pt-4">
+                                   <p className="text-[10px] text-gray-400 font-medium italic leading-relaxed max-w-xs">Your information is safe and handled according to our privacy policy.</p>
+                                   <button type="submit" className="w-full md:w-auto px-12 py-4 bg-accent-red hover:bg-accent-red-dark text-white font-black rounded-xl shadow-xl shadow-red-500/20 transition-all flex items-center justify-center gap-2">
+                                        Send Message <span className="material-symbols-outlined text-[20px]">send</span>
+                                   </button>
+                              </div>
+                         </form>
+                    </div>
+               </div>
+          </section>
+
+          {/* Support Banner Section */}
+          <section className="px-4 md:px-8 mb-24">
+               <div className="max-w-7xl mx-auto bg-primary dark:bg-slate-900 rounded-[3rem] p-12 md:p-20 text-center text-white relative overflow-hidden shadow-2xl">
+                    <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-10"></div>
+                    <div className="relative z-10">
+                         <div className="size-14 bg-white/10 backdrop-blur-md rounded-2xl flex items-center justify-center mx-auto mb-8">
+                              <span className="material-symbols-outlined text-3xl filled">diversity_3</span>
+                         </div>
+                         <h2 className="text-3xl md:text-5xl font-black mb-6">Need Prayer or Pastoral Support?</h2>
+                         <p className="text-blue-100 text-lg md:text-xl font-medium max-w-2xl mx-auto leading-relaxed mb-12 opacity-90">
+                              We believe in the power of prayer. Our dedicated pastoral team is ready to stand with you, in faith, for your breakthrough.
+                         </p>
+                         <div className="flex flex-wrap justify-center gap-4">
+                              <button className="px-8 py-4 bg-white text-primary font-black rounded-xl shadow-lg hover:bg-gray-100 transition-all flex items-center gap-3">
+                                   <span className="material-symbols-outlined text-[20px] filled">call</span> Call Pastoral Line
+                              </button>
+                              <button className="px-8 py-4 bg-white/10 backdrop-blur-md border border-white/20 text-white font-black rounded-xl shadow-lg hover:bg-white/20 transition-all flex items-center gap-3">
+                                   <span className="material-symbols-outlined text-[20px]">send_time_extension</span> Submit Prayer Request
+                              </button>
+                         </div>
+                    </div>
+               </div>
+          </section>
+
+          {/* FAQ Section */}
+          <section className="px-4 md:px-8 mb-24">
+               <div className="max-w-3xl mx-auto">
+                    <div className="text-center mb-16">
+                         <h2 className="text-3xl md:text-4xl font-black text-slate-900 dark:text-white mb-4">Frequently Asked Questions</h2>
+                         <p className="text-gray-500 font-medium uppercase tracking-widest text-xs">Common questions about visiting CACC Bungoma</p>
+                    </div>
+                    
+                    <div className="space-y-4">
+                         {faqs.map((faq, idx) => (
+                              <div key={idx} className="bg-white dark:bg-slate-800 rounded-2xl overflow-hidden border border-gray-100 dark:border-gray-700 shadow-sm">
+                                   <button 
+                                        onClick={() => setOpenFaq(openFaq === idx ? null : idx)}
+                                        className="w-full flex items-center justify-between p-6 text-left"
+                                   >
+                                        <span className="text-sm font-black text-slate-900 dark:text-white">{faq.q}</span>
+                                        <span className={`material-symbols-outlined text-gray-400 transition-transform duration-300 ${openFaq === idx ? 'rotate-180' : ''}`}>expand_more</span>
+                                   </button>
+                                   <div className={`overflow-hidden transition-all duration-300 ${openFaq === idx ? 'max-h-96' : 'max-h-0'}`}>
+                                        <div className="p-6 pt-0 border-t border-gray-50 dark:border-gray-700">
+                                             <p className="text-sm text-gray-500 dark:text-gray-400 leading-relaxed font-medium">
+                                                  {faq.a}
+                                             </p>
+                                        </div>
+                                   </div>
+                              </div>
+                         ))}
+                    </div>
+               </div>
+          </section>
+
+          {/* Map Area */}
+          <section className="relative h-[500px] bg-slate-200 dark:bg-slate-800 overflow-hidden">
+               {/* Mock Map Placeholder */}
+               <div className="absolute inset-0 bg-[#f0f0f0] dark:bg-[#1e2330]" style={{backgroundImage: 'radial-gradient(#d1d5db 0.5px, transparent 0.5px)', backgroundSize: '30px 30px'}}></div>
+               
+               <div className="container mx-auto px-4 h-full relative">
+                    {/* Floating Info Box on Map */}
+                    <div className="absolute top-1/2 left-4 md:left-20 -translate-y-1/2 z-10">
+                         <div className="bg-white dark:bg-slate-800 p-8 rounded-[2rem] shadow-2xl border border-gray-100 dark:border-gray-700 max-w-xs animate-fade-in-left">
+                              <div className="flex items-center gap-2 mb-4">
+                                   <div className="size-2 rounded-full bg-green-500 animate-pulse"></div>
+                                   <span className="text-[10px] font-black text-green-500 uppercase tracking-widest">OPEN FOR WORSHIP</span>
+                              </div>
+                              <h4 className="text-xl font-black text-slate-900 dark:text-white mb-2">CACC Bungoma HQ</h4>
+                              <p className="text-xs text-gray-400 font-medium mb-6">Kibabii Diploma Road, Bungoma, Kenya</p>
+                              <button className="text-primary font-black text-xs uppercase tracking-widest flex items-center gap-2 hover:underline">
+                                   Get Directions <span className="material-symbols-outlined text-sm">arrow_forward</span>
+                              </button>
+                         </div>
+                    </div>
+                    
+                    {/* Map Marker Pin */}
+                    <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
+                         <div className="relative">
+                              <div className="absolute -inset-4 bg-primary/20 rounded-full animate-ping"></div>
+                              <div className="size-10 bg-primary rounded-full shadow-xl border-4 border-white dark:border-slate-800 flex items-center justify-center text-white relative z-10">
+                                   <span className="material-symbols-outlined text-xl filled">church</span>
+                              </div>
+                         </div>
+                    </div>
+               </div>
+
+               {/* View larger map link */}
+               <div className="absolute bottom-4 left-4 z-10">
+                    <button className="bg-white/80 backdrop-blur px-3 py-1.5 rounded-lg text-[10px] font-bold text-gray-500 border border-gray-100 shadow-sm">View larger map</button>
+               </div>
+          </section>
+      </div>
+    );
+};
+
+export const Ministries: React.FC = () => {
+    const [activeFilter, setActiveFilter] = useState("All Ministries");
+
+    return (
+        <div className="bg-white dark:bg-background-dark font-sans flex flex-col">
+             {/* 1. Hero Section */}
+             <section className="relative h-[60vh] min-h-[500px] flex items-center justify-center overflow-hidden">
+                <div className="absolute inset-0">
+                    <img src="https://images.unsplash.com/photo-1511632765486-a01980e01a18?q=80&w=2670&auto=format&fit=crop" className="w-full h-full object-cover" alt="Hero" />
+                    <div className="absolute inset-0 bg-black/60 backdrop-blur-[1px]"></div>
+                </div>
+                <div className="relative z-10 text-center px-4 max-w-4xl">
+                    <h1 className="text-4xl md:text-7xl font-black text-white mb-6 leading-tight drop-shadow-2xl">Connect & Serve</h1>
+                    <p className="text-xl md:text-2xl text-gray-200 mb-10 max-w-2xl mx-auto font-medium">
+                        "For just as each of us has one body with many members, and these members do not all have the same function, so in Christ we, though many, form one body."
+                        <span className="block mt-4 text-sm opacity-70">— Romans 12:4-5</span>
+                    </p>
+                    <div className="flex flex-wrap justify-center gap-4">
+                        <button className="px-8 py-3 bg-primary hover:bg-primary-dark text-white font-bold rounded-lg shadow-xl transition-all">Find Your Group</button>
+                        <button className="px-8 py-3 bg-transparent border-2 border-white/50 text-white font-bold rounded-lg hover:bg-white hover:text-primary transition-all">Explore Ministries</button>
+                    </div>
+                </div>
+             </section>
+
+             {/* 2. Explore Our Ministries */}
+             <section className="py-24 px-4 md:px-8 max-w-7xl mx-auto w-full">
+                  <div className="mb-12">
+                       <h2 className="text-3xl md:text-4xl font-black text-slate-900 dark:text-white mb-4">Explore Our Ministries</h2>
+                       <p className="text-gray-500 text-lg">Find a place to use your gifts and grow in faith.</p>
+                  </div>
+
+                  {/* Filter Pills */}
+                  <div className="flex overflow-x-auto gap-3 pb-8 no-scrollbar">
+                       {MINISTRY_CATEGORIES.map(cat => (
+                           <button 
+                             key={cat} 
+                             onClick={() => setActiveFilter(cat)}
+                             className={`px-6 py-2.5 rounded-full border transition-all whitespace-nowrap font-bold text-sm ${activeFilter === cat ? 'bg-primary border-primary text-white shadow-lg' : 'bg-white dark:bg-slate-800 border-gray-200 dark:border-gray-700 text-gray-600 dark:text-gray-300 hover:border-primary'}`}
+                           >
+                               {cat}
+                           </button>
+                       ))}
+                  </div>
+
+                  {/* Ministries Grid */}
+                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                       {MINISTRIES_DATA.map(min => (
+                           <div key={min.id} className="bg-white dark:bg-slate-800 rounded-3xl overflow-hidden shadow-sm border border-gray-100 dark:border-gray-700 group hover:shadow-xl transition-all duration-300">
+                               <div className="h-60 overflow-hidden relative">
+                                   <img src={min.image} className="w-full h-full object-cover transition duration-700 group-hover:scale-110" alt={min.title} />
+                                   <div className="absolute top-4 left-4">
+                                       <span className="bg-white/90 backdrop-blur px-3 py-1 rounded text-[10px] font-black uppercase text-primary tracking-wider shadow-sm">{min.category}</span>
+                                   </div>
+                               </div>
+                               <div className="p-8">
+                                   <h3 className="text-2xl font-black text-slate-900 dark:text-white mb-3">{min.title}</h3>
+                                   <p className="text-gray-500 dark:text-gray-400 text-sm leading-relaxed mb-8">{min.description}</p>
+                                   
+                                   <div className="flex items-center justify-between">
+                                        <div className="flex -space-x-3">
+                                             <img src={min.leader.avatar} className="size-10 rounded-full border-2 border-white dark:border-slate-800 shadow-sm" alt="Leader" />
+                                             {min.leader2 && <img src={min.leader2.avatar} className="size-10 rounded-full border-2 border-white dark:border-slate-800 shadow-sm" alt="Leader" />}
+                                        </div>
+                                        <button className="text-primary font-black text-sm hover:underline flex items-center gap-1">Learn More <span className="material-symbols-outlined text-sm">arrow_forward</span></button>
+                                   </div>
+                               </div>
+                           </div>
+                       ))}
+                  </div>
+             </section>
+
+             {/* 3. Community Life - Find Cell Group */}
+             <section className="bg-gray-50 dark:bg-slate-900/50 py-24 px-4 md:px-8">
+                  <div className="max-w-7xl mx-auto">
+                       <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
+                            {/* Left: Search & List */}
+                            <div>
+                                 <span className="text-primary font-bold text-xs uppercase tracking-widest mb-4 inline-block">COMMUNITY LIFE</span>
+                                 <h2 className="text-3xl md:text-5xl font-black text-slate-900 dark:text-white mb-6">Find a Cell Group Near You</h2>
+                                 <p className="text-gray-500 text-lg mb-10 max-w-lg">Life is better together. Join a small group to build lasting friendships, study the Word, and grow in your walk with Christ.</p>
+                                 
+                                 <div className="bg-white dark:bg-slate-800 p-6 rounded-3xl shadow-sm border border-gray-100 dark:border-gray-700 mb-10">
+                                      <p className="text-xs font-bold text-gray-400 uppercase mb-3">Search by location</p>
+                                      <div className="flex flex-col sm:flex-row gap-3">
+                                           <div className="relative flex-1">
+                                                <span className="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-gray-400">search</span>
+                                                <input type="text" placeholder="Enter postcode or City..." className="w-full pl-12 pr-4 py-3 bg-gray-50 dark:bg-slate-900 border-none rounded-xl focus:ring-2 focus:ring-primary text-sm dark:text-white" />
+                                           </div>
+                                           <button className="bg-primary text-white font-bold px-8 py-3 rounded-xl hover:bg-primary-dark transition">Search</button>
+                                      </div>
+                                      <div className="flex flex-wrap gap-2 mt-4">
+                                           {["Northside", "City Center", "West End"].map(loc => (
+                                               <button key={loc} className="px-4 py-1.5 rounded-full bg-gray-100 dark:bg-slate-700 text-[10px] font-bold text-gray-500 dark:text-gray-300 hover:bg-gray-200 transition">{loc}</button>
+                                           ))}
+                                      </div>
+                                 </div>
+
+                                 <div className="space-y-4">
+                                      <p className="text-xs font-bold text-gray-400 uppercase mb-4">AVAILABLE GROUPS</p>
+                                      {CELL_GROUPS_DATA.map(group => (
+                                          <div key={group.id} className="bg-white dark:bg-slate-800 p-6 rounded-2xl flex items-center justify-between border border-gray-100 dark:border-gray-700 hover:border-primary transition duration-300 shadow-sm">
+                                               <div className="flex gap-4 items-center">
+                                                    <div className={`size-12 rounded-xl flex items-center justify-center ${group.type === 'Youth' ? 'bg-orange-50 text-orange-500' : 'bg-blue-50 text-primary'}`}>
+                                                         <span className="material-symbols-outlined">{group.icon}</span>
+                                                    </div>
+                                                    <div>
+                                                         <h4 className="font-bold text-slate-900 dark:text-white">{group.name}</h4>
+                                                         <p className="text-xs text-gray-500 mt-0.5">{group.schedule}</p>
+                                                         <p className="text-[10px] text-gray-400 flex items-center gap-1 mt-1"><span className="material-symbols-outlined text-xs">location_on</span> {group.distance}</p>
+                                                    </div>
+                                               </div>
+                                               <div className="flex flex-col items-end gap-3">
+                                                    <span className="text-[10px] font-bold text-green-500 bg-green-50 px-2 py-0.5 rounded uppercase">{group.status}</span>
+                                                    <button className="text-primary font-black text-sm hover:underline">JOIN</button>
+                                               </div>
+                                          </div>
+                                      ))}
+                                 </div>
+                            </div>
+
+                            {/* Right: Map Visualization */}
+                            <div className="relative">
+                                 <div className="aspect-square w-full bg-gray-200 dark:bg-slate-800 rounded-[3rem] overflow-hidden shadow-2xl relative border-8 border-white dark:border-slate-800">
+                                      {/* Mock Map Background */}
+                                      <div className="absolute inset-0 bg-[#e5e5f7] dark:bg-[#1a202c] opacity-30" style={{backgroundImage: 'radial-gradient(#444cf7 0.5px, transparent 0.5px)', backgroundSize: '24px 24px'}}></div>
+                                      
+                                      {/* Map Pins */}
+                                      <div className="absolute top-[30%] left-[20%] animate-bounce">
+                                           <div className="bg-primary text-white p-2 rounded-full shadow-xl flex items-center justify-center border-2 border-white">
+                                                <span className="material-symbols-outlined text-sm filled">home</span>
+                                           </div>
+                                      </div>
+                                      <div className="absolute top-[50%] left-[60%] animate-bounce delay-200">
+                                           <div className="bg-primary text-white p-2 rounded-full shadow-xl flex items-center justify-center border-2 border-white">
+                                                <span className="material-symbols-outlined text-sm filled">home</span>
+                                           </div>
+                                      </div>
+                                      <div className="absolute top-[70%] left-[80%] animate-bounce delay-500">
+                                           <div className="bg-primary text-white p-2 rounded-full shadow-xl flex items-center justify-center border-2 border-white">
+                                                <span className="material-symbols-outlined text-sm filled">home</span>
+                                           </div>
+                                      </div>
+
+                                      {/* Map UI Elements */}
+                                      <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+                                           <span className="text-gray-400 font-bold opacity-20 text-4xl">MAP VIEW</span>
+                                      </div>
+
+                                      {/* Start New Group Card */}
+                                      <div className="absolute bottom-10 left-10 right-10">
+                                           <div className="bg-white/90 backdrop-blur p-4 rounded-2xl shadow-xl flex items-center justify-between border border-white/50">
+                                                <div>
+                                                     <p className="text-xs font-bold text-slate-800">Can't find a group near you?</p>
+                                                     <button className="text-primary font-black text-xs hover:underline">Start a new group</button>
+                                                </div>
+                                                <div className="size-8 rounded-full bg-blue-50 text-primary flex items-center justify-center">
+                                                     <span className="material-symbols-outlined text-sm">add</span>
+                                                </div>
+                                           </div>
+                                      </div>
+                                 </div>
+                            </div>
+                       </div>
+                  </div>
+             </section>
+
+             {/* 4. Testimonial Section */}
+             <section className="py-32 px-4 md:px-8 text-center bg-white dark:bg-background-dark">
+                  <div className="max-w-4xl mx-auto">
+                       <span className="material-symbols-outlined text-6xl text-blue-100 dark:text-slate-800 mb-8 filled">format_quote</span>
+                       <h2 className="text-2xl md:text-4xl font-black text-slate-900 dark:text-white mb-12 leading-relaxed italic">
+                           "Joining the Ushering Team helped me feel like I truly belonged. It wasn't just about serving; it was about the family I found while doing it."
+                       </h2>
+                       <div className="flex flex-col items-center gap-4">
+                            <img src="https://i.pravatar.cc/150?u=rebecca_smith" className="size-20 rounded-full border-4 border-white shadow-xl" alt="Rebecca Smith" />
+                            <div>
+                                 <h4 className="font-black text-lg text-slate-900 dark:text-white">Rebecca Smith</h4>
+                                 <p className="text-xs font-bold text-gray-400 uppercase tracking-widest">Member since 2018</p>
+                            </div>
+                       </div>
+                  </div>
+             </section>
+        </div>
+    );
+};
+
 export const About: React.FC = () => {
     return (
-        <div className="bg-white dark:bg-slate-950 font-sans">
-             
-             {/* 1. Hero */}
-             <div className="relative h-[600px] flex items-center justify-center text-center px-4">
-                 <div className="absolute inset-0">
-                     <img src="https://images.unsplash.com/photo-1438232992991-995b7058bbb3?q=80&w=2673&auto=format&fit=crop" alt="Worship" className="w-full h-full object-cover" />
-                     <div className="absolute inset-0 bg-black/60"></div>
-                 </div>
-                 <div className="relative z-10 max-w-4xl mx-auto text-white">
-                     <h1 className="text-4xl md:text-6xl font-black mb-4 leading-tight">Rooted in Faith, <span className="text-blue-400">Growing in Love</span></h1>
-                     <p className="text-lg md:text-xl text-gray-200 mb-8 max-w-2xl mx-auto">Discover the heart of Christ's Ambassadors Celebration Centre. A place where everyone is welcome and everyone belongs.</p>
-                     <div className="flex justify-center gap-4">
-                         <button className="px-8 py-3 bg-[#4F46E5] hover:bg-[#4338ca] text-white font-bold rounded-full transition">Join Us</button>
-                         <button className="px-8 py-3 border border-white/30 hover:bg-white/10 text-white font-bold rounded-full transition">Learn More</button>
-                     </div>
-                 </div>
-             </div>
+        <div className="font-sans flex flex-col bg-white dark:bg-background-dark">
+            {/* HERO SECTION */}
+            <section className="relative h-[80vh] min-h-[600px] flex items-center justify-center overflow-hidden">
+                <img src="https://images.unsplash.com/photo-1510915361408-d5965ce7f59b?q=80&w=2670&auto=format&fit=crop" className="absolute inset-0 w-full h-full object-cover" alt="Worship"/>
+                <div className="absolute inset-0 bg-black/50 backdrop-blur-[2px]"></div>
+                <div className="relative z-10 text-center px-4 max-w-4xl">
+                    <h1 className="text-5xl md:text-7xl font-black text-white mb-6 leading-tight drop-shadow-2xl">
+                        Rooted in Faith, <br/><span className="text-blue-400">Growing in Love</span>
+                    </h1>
+                    <p className="text-xl md:text-2xl font-serif text-gray-200 mb-10 drop-shadow-lg max-w-2xl mx-auto">
+                        Discover the heart of Christ's Ambassadors Celebration Centre, a place where everyone is welcome and everyone belongs.
+                    </p>
+                    <div className="flex flex-wrap justify-center gap-4">
+                        <Link to="/auth" className="px-8 py-4 bg-primary text-white font-bold rounded-md shadow-xl hover:bg-primary-dark transition-all uppercase tracking-widest text-sm">Sign Up Today</Link>
+                        <button className="px-8 py-4 bg-white/20 backdrop-blur-md text-white border border-white/30 font-bold rounded-md hover:bg-white hover:text-primary transition-all uppercase tracking-widest text-sm">Visit Our Site</button>
+                    </div>
+                </div>
+            </section>
 
-             {/* 2. Mission Vision Values */}
-             <div className="py-20 px-4 max-w-7xl mx-auto">
-                 <div className="text-center mb-16">
-                     <p className="text-[#4F46E5] font-bold text-xs uppercase tracking-widest mb-2">Who We Are</p>
-                     <h2 className="text-3xl md:text-4xl font-black text-slate-900 dark:text-white mb-4">Mission, Vision & Values</h2>
-                     <p className="text-gray-500 max-w-2xl mx-auto">We are driven by a calling to serve God and our community with excellence and integrity.</p>
-                 </div>
+            {/* MISSION VISION VALUES */}
+            <section className="py-24 px-4 bg-gray-50 dark:bg-slate-900/50">
+                <div className="max-w-7xl mx-auto text-center">
+                    <span className="text-primary dark:text-blue-400 font-bold text-xs uppercase tracking-widest mb-2 inline-block">Who We Are</span>
+                    <h2 className="text-4xl md:text-5xl font-black text-slate-900 dark:text-white mb-6">Mission, Vision & Values</h2>
+                    <p className="text-gray-500 max-w-2xl mx-auto mb-16 leading-relaxed">
+                        We are driven by a passion to serve God and our community with excellence and integrity.
+                    </p>
 
-                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-                     {[
-                         { icon: "church", title: "Our Mission", desc: "To reach the lost through the gospel of Jesus Christ, building a community of faith." },
-                         { icon: "public", title: "Our Vision", desc: "To see a global nation impacting generations with truth, grace, and the love of God." },
-                         { icon: "favorite", title: "Core Values", desc: "Integrity, Excellence, Love, and Faith serve as the foundation of our walk." },
-                         { icon: "handshake", title: "Service", desc: "Dedicated to serving our local and global community with compassionate hearts." }
-                     ].map((item, i) => (
-                         <div key={i} className="p-8 rounded-2xl bg-white dark:bg-slate-900 border border-gray-100 dark:border-gray-800 shadow-sm hover:shadow-lg transition-shadow">
-                             <div className="size-12 rounded-lg bg-blue-50 dark:bg-blue-900/20 text-[#4F46E5] flex items-center justify-center mb-6">
-                                 <span className="material-symbols-outlined">{item.icon}</span>
-                             </div>
-                             <h3 className="font-bold text-lg text-slate-900 dark:text-white mb-2">{item.title}</h3>
-                             <p className="text-gray-500 text-sm leading-relaxed">{item.desc}</p>
-                         </div>
-                     ))}
-                 </div>
-             </div>
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                        {[
+                            { title: 'Our Mission', icon: 'church', desc: 'To reconcile men to God through the gospel of Jesus Christ, building a community of faith.' },
+                            { title: 'Our Vision', icon: 'public', desc: 'To be a global voice impacting generations with truth, grace, and the love of God.' },
+                            { title: 'Core Values', icon: 'favorite', desc: 'Integrity, Excellence, Love, and Faith are the pillars of the work we do.' },
+                            { title: 'Service', icon: 'volunteer_activism', desc: 'Dedicated to serving our local and global community with compassion and purpose.' }
+                        ].map((item, i) => (
+                            <div key={i} className="bg-white dark:bg-slate-800 p-8 rounded-2xl shadow-sm border border-gray-100 dark:border-gray-700 text-center flex flex-col items-center hover:shadow-xl transition-shadow duration-300">
+                                <div className="size-16 rounded-full bg-blue-50 dark:bg-blue-900/20 text-primary dark:text-blue-400 flex items-center justify-center mb-6">
+                                    <span className="material-symbols-outlined text-3xl">{item.icon}</span>
+                                </div>
+                                <h3 className="text-xl font-bold text-slate-900 dark:text-white mb-4">{item.title}</h3>
+                                <p className="text-gray-500 dark:text-gray-400 text-sm leading-relaxed">{item.desc}</p>
+                            </div>
+                        ))}
+                    </div>
+                </div>
+            </section>
 
-             {/* 3. History Timeline */}
-             <div className="py-20 bg-gray-50 dark:bg-slate-900/50">
-                 <div className="max-w-7xl mx-auto px-4 grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-                     <div>
-                         <p className="text-[#4F46E5] font-bold text-xs uppercase tracking-widest mb-2">Our History</p>
-                         <h2 className="text-3xl md:text-4xl font-black text-slate-900 dark:text-white mb-10">A Journey of Faith</h2>
-                         
-                         <div className="space-y-8 relative pl-8 border-l border-gray-200 dark:border-gray-700">
-                             {[
-                                 { year: "1995 - The Beginning", desc: "Started as a small prayer group in a living room. CACC was founded on the promise of gathering souls for Christ." },
-                                 { year: "2008 - First Sanctuary", desc: "After years of renting halls, we dedicated our first permanent building, opening doors for expanded community service." },
-                                 { year: "Today - Global Reach", desc: "Today, CACC ministers to thousands locally and globally through online streaming and missions." }
-                             ].map((point, i) => (
-                                 <div key={i} className="relative">
-                                     <div className="absolute -left-[37px] top-1 size-4 rounded-full bg-[#4F46E5] border-4 border-white dark:border-slate-900"></div>
-                                     <h4 className="font-bold text-slate-900 dark:text-white mb-2">{point.year}</h4>
-                                     <p className="text-gray-500 text-sm leading-relaxed">{point.desc}</p>
-                                 </div>
-                             ))}
-                         </div>
-                     </div>
-                     <div className="relative">
-                         <img src="https://images.unsplash.com/photo-1601142634808-38923eb7c560?q=80&w=2670&auto=format&fit=crop" alt="History" className="rounded-2xl shadow-2xl w-full" />
-                     </div>
-                 </div>
-             </div>
+            {/* OUR HISTORY */}
+            <section className="py-24 px-4 max-w-7xl mx-auto overflow-hidden">
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+                    <div className="space-y-12">
+                        <div>
+                            <span className="text-primary dark:text-blue-400 font-bold text-xs uppercase tracking-widest mb-2 inline-block">Our History</span>
+                            <h2 className="text-4xl md:text-5xl font-black text-slate-900 dark:text-white leading-tight">A Journey of Faith</h2>
+                        </div>
+                        
+                        <div className="space-y-8 relative">
+                            {/* Vertical Line */}
+                            <div className="absolute left-1.5 top-2 bottom-2 w-0.5 bg-blue-100 dark:bg-slate-800"></div>
+                            
+                            {[
+                                { year: '1991 - The Beginning', desc: 'Started as a small prayer group in a living room, CACC was founded on the promise of gathering souls for Christ.' },
+                                { year: '2008 - First Sanctuary', desc: 'After years of renting halls, we dedicated our first permanent building, opening doors for expanded community service.' },
+                                { year: 'Today - Global Reach', desc: 'Today, CACC ministers to thousands locally and globally through live streaming and missions.' }
+                            ].map((milestone, i) => (
+                                <div key={i} className="relative pl-8">
+                                    <div className="absolute left-0 top-1.5 size-3 rounded-full bg-primary border-4 border-white dark:border-slate-900 z-10"></div>
+                                    <h4 className="text-lg font-bold text-slate-900 dark:text-white mb-2">{milestone.year}</h4>
+                                    <p className="text-gray-500 text-sm leading-relaxed max-w-md">{milestone.desc}</p>
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+                    
+                    <div className="relative">
+                        <div className="aspect-[4/5] rounded-[2rem] overflow-hidden shadow-2xl rotate-3">
+                             <img src="https://images.unsplash.com/photo-1544928147-7972fc53599e?q=80&w=2574&auto=format&fit=crop" className="w-full h-full object-cover grayscale" alt="Historical moment" />
+                             <div className="absolute inset-0 bg-primary/10 mix-blend-multiply"></div>
+                        </div>
+                        <div className="absolute -bottom-8 -left-8 aspect-square w-48 bg-white dark:bg-slate-800 p-4 rounded-3xl shadow-2xl -rotate-6 hidden md:block">
+                             <img src="https://images.unsplash.com/photo-1507692049790-de58293a4697?q=80&w=2670&auto=format&fit=crop" className="w-full h-full object-cover rounded-2xl" alt="Congregation" />
+                        </div>
+                    </div>
+                </div>
+            </section>
 
-             {/* 4. Leadership */}
-             <div className="py-24 px-4 max-w-7xl mx-auto">
-                 <div className="text-center mb-16">
-                     <p className="text-[#4F46E5] font-bold text-xs uppercase tracking-widest mb-2">Leadership</p>
-                     <h2 className="text-3xl md:text-4xl font-black text-slate-900 dark:text-white mb-4">Meet Our Shepherds</h2>
-                 </div>
+            {/* LEADERSHIP */}
+            <section className="py-24 px-4 bg-white dark:bg-slate-900">
+                <div className="max-w-7xl mx-auto text-center">
+                    <span className="text-primary dark:text-blue-400 font-bold text-xs uppercase tracking-widest mb-2 inline-block">Leadership</span>
+                    <h2 className="text-4xl md:text-5xl font-black text-slate-900 dark:text-white mb-16">Meet Our Shepherds</h2>
 
-                 <div className="grid grid-cols-1 md:grid-cols-3 gap-10 text-center">
-                     {[
-                         { name: "Rev. David Omondi", role: "Senior Pastor", img: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=2574&auto=format&fit=crop", desc: "With over 20 years of ministry, Rev. David leads with a heart for teaching truth and creating a world of better tomorrow for the next generation." },
-                         { name: "Sarah Williams", role: "Head of Missions", img: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=80&w=2576&auto=format&fit=crop", desc: "Sarah oversees our outreach programs, ensuring that the love of Christ reaches the streets and communities that need it most." },
-                         { name: "James Carter", role: "Worship Leader", img: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=80&w=2574&auto=format&fit=crop", desc: "James leads our worship team with passion, believing that music is a divine instrument, ushering everyone into presence for revival." }
-                     ].map((leader, i) => (
-                         <div key={i} className="flex flex-col items-center">
-                             <div className="size-32 rounded-full overflow-hidden mb-6 border-4 border-white shadow-lg">
-                                 <img src={leader.img} alt={leader.name} className="w-full h-full object-cover" />
-                             </div>
-                             <h3 className="text-xl font-bold text-slate-900 dark:text-white mb-1">{leader.name}</h3>
-                             <p className="text-[#4F46E5] font-bold text-xs uppercase mb-4">{leader.role}</p>
-                             <p className="text-gray-500 text-sm leading-relaxed max-w-sm">{leader.desc}</p>
-                             <div className="mt-4 text-gray-400 hover:text-primary cursor-pointer"><span className="material-symbols-outlined text-lg">mail</span></div>
-                         </div>
-                     ))}
-                 </div>
-             </div>
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
+                        {[
+                            { name: 'Rev. David Ombwa', role: 'Senior Pastor', img: 'https://i.pravatar.cc/300?u=ombwa', bio: 'With over 20 years of ministry, Rev. David leads with a heart for soul-winning and a passion for word of God in reaching the next generation.' },
+                            { name: 'Sarah Williams', role: 'Head of Missions', img: 'https://i.pravatar.cc/300?u=sarahw', bio: 'Sarah oversees our outreach programs, ensuring that the love of Christ reaches the street and communities that need it most.' },
+                            { name: 'James Carter', role: 'Associate Pastor', img: 'https://i.pravatar.cc/300?u=carter', bio: 'James leads the worship team and discipleship, believing that our worship transcends songs, and is a primarily a lifestyle of sacrifice.' }
+                        ].map((pastor, i) => (
+                            <div key={i} className="group p-8 rounded-[2rem] bg-gray-50 dark:bg-slate-800/50 hover:bg-white dark:hover:bg-slate-800 transition-all duration-500 shadow-sm hover:shadow-2xl border border-transparent hover:border-gray-100 dark:hover:border-slate-700">
+                                <div className="size-32 rounded-full overflow-hidden mx-auto mb-6 border-4 border-white dark:border-slate-700 shadow-lg">
+                                    <img src={pastor.img} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" alt={pastor.name}/>
+                                </div>
+                                <h3 className="text-xl font-bold text-slate-900 dark:text-white mb-1">{pastor.name}</h3>
+                                <p className="text-primary dark:text-blue-400 font-bold text-xs uppercase tracking-widest mb-4">{pastor.role}</p>
+                                <p className="text-gray-500 dark:text-gray-400 text-xs leading-relaxed mb-8">{pastor.bio}</p>
+                                <div className="flex justify-center gap-4 text-gray-400">
+                                    <button className="hover:text-primary transition-colors"><span className="material-symbols-outlined text-[20px]">public</span></button>
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+                </div>
+            </section>
 
-             {/* 5. What to Expect */}
-             <div className="bg-[#4F46E5] py-20 px-4 text-white">
-                 <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-                     <div>
-                         <p className="text-blue-200 font-bold text-xs uppercase tracking-widest mb-2">Visit Us</p>
-                         <h2 className="text-3xl md:text-4xl font-black mb-6">What to Expect</h2>
-                         <p className="text-blue-100 mb-8 leading-relaxed text-lg">
-                             First time visiting? We want your experience to be seamless and enjoyable. 
-                             Here is a quick guide to make you feel at home from the moment you arrive.
-                         </p>
-                         <button className="bg-white text-[#4F46E5] px-8 py-3 rounded-lg font-bold hover:bg-gray-100 transition">Plan Your Visit</button>
-                     </div>
-                     <div className="space-y-6">
-                         {[
-                             { icon: "schedule", title: "Service Times", desc: "Sundays at 9:00 AM and 11:00 AM. Wednesdays at 6:30 PM for Midweek Bible Study." },
-                             { icon: "child_care", title: "Kids Ministry", desc: "Safe, fun, and biblical learning environments for children aged 6 months to 12 years old." },
-                             { icon: "directions_car", title: "Parking", desc: "Ample free parking is available on-site. Follow the signs for 'First Time Guest Parking'." }
-                         ].map((item, i) => (
-                             <div key={i} className="flex gap-4 p-4 rounded-xl bg-white/10 border border-white/10">
-                                 <span className="material-symbols-outlined text-2xl mt-1">{item.icon}</span>
-                                 <div>
-                                     <h4 className="font-bold text-lg mb-1">{item.title}</h4>
-                                     <p className="text-blue-100 text-sm leading-relaxed">{item.desc}</p>
-                                 </div>
-                             </div>
-                         ))}
-                     </div>
-                 </div>
-             </div>
+            {/* WHAT TO EXPECT */}
+            <section className="bg-primary py-24 px-4 text-white">
+                <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+                    <div>
+                        <span className="text-blue-300 font-bold text-xs uppercase tracking-widest mb-4 inline-block">VISIT US</span>
+                        <h2 className="text-4xl md:text-5xl font-black mb-8 leading-tight">What to Expect</h2>
+                        <p className="text-blue-100 text-lg mb-10 max-w-lg leading-relaxed">
+                            First time visiting a new church can be intimidating. Here is the quick guide to make your first visit seamless and enjoyable.
+                        </p>
+                        <button className="px-8 py-4 bg-white text-primary font-bold rounded-md shadow-xl hover:bg-gray-100 transition-all uppercase tracking-widest text-sm">Plan Your Visit</button>
+                    </div>
+                    
+                    <div className="space-y-6">
+                        {[
+                            { title: 'Service Times', icon: 'schedule', text: 'Sundays at 9:00 AM and 11:30 AM. Wednesday mid-week @ 6:00 PM for Word & Prayer.' },
+                            { title: 'Kids Ministry', icon: 'child_care', text: 'Safe, fun, and biblical based environments for children aged 6 months to 12 years old.' },
+                            { title: 'Parking', icon: 'local_parking', text: 'Ample free parking is available on-site. Follow the signs for "First Time Guest Parking".' }
+                        ].map((card, i) => (
+                            <div key={i} className="bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl p-8 flex items-start gap-6 group hover:bg-white/20 transition-all">
+                                <div className="size-12 rounded-xl bg-white/10 flex items-center justify-center shrink-0">
+                                    <span className="material-symbols-outlined text-white">{card.icon}</span>
+                                </div>
+                                <div>
+                                    <h4 className="text-xl font-bold mb-2">{card.title}</h4>
+                                    <p className="text-blue-100 text-sm leading-relaxed">{card.text}</p>
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+                </div>
+            </section>
 
-             {/* 6. Stories of Grace (Testimonials) */}
-             <div className="py-20 px-4 max-w-7xl mx-auto">
-                 <div className="text-center mb-16">
-                     <p className="text-[#4F46E5] font-bold text-xs uppercase tracking-widest mb-2">Community Voices</p>
-                     <h2 className="text-3xl md:text-4xl font-black text-slate-900 dark:text-white">Stories of Grace</h2>
-                 </div>
-                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                     {[
-                         { text: "CACC has been a sanctuary for my family. The warmth of the people and the depth of the teaching have helped us grow spiritually in ways we never imagined.", author: "Rebecca M.", sub: "Member since 2019", img: "https://i.pravatar.cc/150?u=rebecca" },
-                         { text: "I found a community that truly cares. The men's ministry has provided me with accountability and brotherhood that was missing in my life.", author: "John D.", sub: "Member since 2021", img: "https://i.pravatar.cc/150?u=john" }
-                     ].map((t, i) => (
-                         <div key={i} className="bg-white dark:bg-slate-900 p-8 rounded-2xl border border-gray-100 dark:border-gray-800 shadow-sm">
-                             <p className="text-gray-600 dark:text-gray-300 italic mb-6 leading-relaxed">"{t.text}"</p>
-                             <div className="flex items-center gap-3">
-                                 <img src={t.img} alt={t.author} className="size-10 rounded-full" />
-                                 <div>
-                                     <p className="text-sm font-bold text-slate-900 dark:text-white">{t.author}</p>
-                                     <p className="text-xs text-gray-500">{t.sub}</p>
-                                 </div>
-                             </div>
-                         </div>
-                     ))}
-                 </div>
-             </div>
+            {/* STORIES OF GRACE */}
+            <section className="py-24 px-4 bg-gray-50 dark:bg-slate-900/50">
+                <div className="max-w-7xl mx-auto text-center">
+                    <span className="text-primary dark:text-blue-400 font-bold text-xs uppercase tracking-widest mb-2 inline-block">COMMUNITY VOICES</span>
+                    <h2 className="text-4xl md:text-5xl font-black text-slate-900 dark:text-white mb-16">Stories of Grace</h2>
 
-             {/* 7. Bottom CTA */}
-             <div className="py-12 px-4 max-w-4xl mx-auto">
-                 <div className="bg-gray-50 dark:bg-slate-800 rounded-3xl p-12 text-center border border-gray-100 dark:border-gray-700">
-                     <h2 className="text-2xl font-black text-slate-900 dark:text-white mb-3">Ready to take the next step?</h2>
-                     <p className="text-gray-500 mb-8">Whether you are new to faith or looking for a new church home, there is a place for you here.</p>
-                     <div className="flex justify-center gap-4">
-                         <button className="px-6 py-3 bg-[#4F46E5] hover:bg-[#4338ca] text-white font-bold rounded-lg shadow-lg shadow-indigo-500/20 transition">New Here? Start</button>
-                         <button className="px-6 py-3 bg-white dark:bg-slate-700 border border-gray-200 dark:border-gray-600 text-slate-700 dark:text-white font-bold rounded-lg hover:bg-gray-50 dark:hover:bg-slate-600 transition">Contact Us</button>
-                     </div>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                        {[
+                            { name: 'Rebecca M.', role: 'Worship Leader', text: 'CACC has been a sanctuary for my family. The warmth of the people and the depth of the teaching have helped us grow spiritually in ways we never imagined.', avatar: 'https://i.pravatar.cc/150?u=rebecca' },
+                            { name: 'John D.', role: 'Active Volunteer', text: 'Found a community that truly cares. The media ministry has provided me with a way to serve and use my talent to help help spread my city with faith.', avatar: 'https://i.pravatar.cc/150?u=johnd' }
+                        ].map((story, i) => (
+                            <div key={i} className="bg-white dark:bg-slate-800 p-10 rounded-3xl shadow-sm border border-gray-100 dark:border-gray-700 text-left relative">
+                                <span className="absolute top-8 left-8 text-6xl text-blue-100 dark:text-slate-700 font-serif leading-none">"</span>
+                                <p className="text-gray-500 dark:text-gray-300 text-lg italic leading-relaxed mb-8 relative z-10 font-serif">
+                                    {story.text}
+                                </p>
+                                <div className="flex items-center gap-4">
+                                    <img src={story.avatar} className="size-12 rounded-full object-cover" alt={story.name}/>
+                                    <div>
+                                        <h4 className="font-bold text-slate-900 dark:text-white">{story.name}</h4>
+                                        <p className="text-xs text-gray-400 uppercase tracking-widest font-bold">{story.role}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+                </div>
+            </section>
+
+            {/* CTA SECTION */}
+            <section className="py-24 px-4">
+                 <div className="max-w-4xl mx-auto bg-white dark:bg-slate-800 rounded-[3rem] p-12 md:p-20 text-center shadow-2xl border border-gray-100 dark:border-gray-700">
+                    <h2 className="text-3xl md:text-4xl font-black text-slate-900 dark:text-white mb-4">Ready to take the next step?</h2>
+                    <p className="text-gray-500 dark:text-gray-400 mb-10 max-w-lg mx-auto">
+                        Whether you are new to faith or looking for a new church home, there is a place for you here.
+                    </p>
+                    <div className="flex flex-wrap justify-center gap-4">
+                        <Link to="/events" className="px-10 py-4 bg-primary text-white font-bold rounded-md shadow-xl hover:bg-primary-dark transition-all flex items-center gap-2">
+                             Plan Your Visit <span className="material-symbols-outlined text-sm">arrow_forward</span>
+                        </Link>
+                        <Link to="/contact" className="px-10 py-4 bg-transparent text-gray-700 dark:text-gray-200 border border-gray-200 dark:border-gray-700 font-bold rounded-md hover:bg-gray-50 transition-all">Contact Us</Link>
+                    </div>
                  </div>
-             </div>
+            </section>
         </div>
     );
 };
 
 export const Events: React.FC = () => {
-    const [view, setView] = useState<'list' | 'calendar'>('list');
-
     return (
-        <div className="bg-background-light dark:bg-background-dark min-h-screen py-10 px-4 md:px-8 font-sans">
-             <div className="max-w-7xl mx-auto">
-                 
-                 {/* Header */}
-                 <div className="mb-10">
-                     <span className="text-[#4F46E5] font-bold text-xs uppercase tracking-widest flex items-center gap-1 mb-2">
-                         <span className="size-1.5 rounded-full bg-[#4F46E5]"></span> Community Fellowship
-                     </span>
-                     <h1 className="text-4xl font-black text-slate-900 dark:text-white mb-2">Upcoming Gatherings</h1>
-                     <p className="text-gray-500 dark:text-gray-400">"For where two or three gather in my name, there am I with them." <br/> <span className="text-xs text-gray-400">— Matthew 18:20</span></p>
-                 </div>
+        <div className="bg-background-off dark:bg-background-dark font-sans flex flex-col pb-20">
+             {/* 1. Header Section */}
+             <section className="relative pt-24 pb-16 px-4 md:px-8">
+                  <div className="max-w-7xl mx-auto">
+                       <span className="text-primary font-black text-xs uppercase tracking-[0.2em] mb-4 inline-block flex items-center gap-2">
+                           <span className="w-8 h-px bg-primary"></span> COMMUNITY FELLOWSHIP
+                       </span>
+                       <h1 className="text-4xl md:text-6xl font-black text-slate-900 dark:text-white mb-6">Upcoming Gatherings</h1>
+                       <p className="text-gray-500 dark:text-gray-400 text-lg md:text-xl font-medium max-w-2xl leading-relaxed italic">
+                           "For where two or three gather in my name, there am I with them."
+                           <span className="block mt-2 text-sm opacity-60 not-italic">— Matthew 18:20</span>
+                       </p>
+                  </div>
+             </section>
 
-                 {/* Filters */}
-                 <div className="bg-white dark:bg-slate-800 p-4 rounded-xl shadow-sm border border-gray-100 dark:border-gray-700 mb-10 flex flex-col md:flex-row gap-4 items-center justify-between">
-                     <div className="relative w-full md:w-80">
-                         <span className="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 text-lg">search</span>
-                         <input type="text" placeholder="Search events, speakers, or topics..." className="w-full pl-10 pr-4 py-2 bg-gray-50 dark:bg-slate-900 border-none rounded-lg text-sm focus:ring-1 focus:ring-primary dark:text-white placeholder-gray-400" />
-                     </div>
-                     
-                     <div className="flex gap-2 w-full md:w-auto overflow-x-auto no-scrollbar">
-                         <button className="flex items-center gap-1 px-3 py-2 bg-white dark:bg-slate-900 border border-gray-200 dark:border-gray-700 rounded-lg text-xs font-bold text-slate-600 dark:text-gray-300 hover:bg-gray-50 whitespace-nowrap">
-                             Category: All <span className="material-symbols-outlined text-sm">expand_more</span>
-                         </button>
-                         <button className="flex items-center gap-1 px-3 py-2 bg-white dark:bg-slate-900 border border-gray-200 dark:border-gray-700 rounded-lg text-xs font-bold text-slate-600 dark:text-gray-300 hover:bg-gray-50 whitespace-nowrap">
-                             Month: October <span className="material-symbols-outlined text-sm">expand_more</span>
-                         </button>
-                         <button className="flex items-center gap-1 px-3 py-2 bg-white dark:bg-slate-900 border border-gray-200 dark:border-gray-700 rounded-lg text-xs font-bold text-slate-600 dark:text-gray-300 hover:bg-gray-50 whitespace-nowrap">
-                             Location <span className="material-symbols-outlined text-sm">expand_more</span>
-                         </button>
-                     </div>
+             {/* 2. Filter Bar */}
+             <section className="px-4 md:px-8 mb-12">
+                  <div className="max-w-7xl mx-auto bg-white dark:bg-slate-800 p-3 rounded-2xl shadow-sm border border-gray-100 dark:border-gray-700 flex flex-col md:flex-row items-center gap-4">
+                       <div className="relative flex-1 w-full">
+                            <span className="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-gray-400">search</span>
+                            <input type="text" placeholder="Search events, speakers, or topics..." className="w-full pl-12 pr-4 py-3 bg-gray-50 dark:bg-slate-900 border-none rounded-xl text-sm dark:text-white focus:ring-1 focus:ring-primary" />
+                       </div>
+                       <div className="flex gap-2 w-full md:w-auto">
+                            <select className="bg-gray-50 dark:bg-slate-900 border-none rounded-xl text-xs font-bold text-gray-500 dark:text-gray-300 py-3 pl-4 pr-10 focus:ring-1 focus:ring-primary w-full">
+                                 <option>Category: All</option>
+                            </select>
+                            <select className="bg-gray-50 dark:bg-slate-900 border-none rounded-xl text-xs font-bold text-gray-500 dark:text-gray-300 py-3 pl-4 pr-10 focus:ring-1 focus:ring-primary w-full">
+                                 <option>Month: October</option>
+                            </select>
+                            <select className="bg-gray-50 dark:bg-slate-900 border-none rounded-xl text-xs font-bold text-gray-500 dark:text-gray-300 py-3 pl-4 pr-10 focus:ring-1 focus:ring-primary w-full">
+                                 <option>Location</option>
+                            </select>
+                       </div>
+                       <div className="flex bg-gray-100 dark:bg-slate-700 p-1 rounded-xl w-full md:w-auto">
+                            <button className="flex-1 md:flex-none px-4 py-2 bg-white dark:bg-slate-800 rounded-lg shadow-sm text-xs font-bold text-slate-900 dark:text-white flex items-center justify-center gap-2">
+                                <span className="material-symbols-outlined text-[18px]">list</span> List
+                            </button>
+                            <button className="flex-1 md:flex-none px-4 py-2 text-xs font-bold text-gray-500 dark:text-gray-400 flex items-center justify-center gap-2 hover:bg-white/50 dark:hover:bg-slate-600 transition rounded-lg">
+                                <span className="material-symbols-outlined text-[18px]">calendar_month</span> Calendar
+                            </button>
+                       </div>
+                  </div>
+             </section>
 
-                     <div className="flex bg-gray-100 dark:bg-slate-900 p-1 rounded-lg shrink-0">
-                         <button onClick={() => setView('list')} className={`px-3 py-1.5 rounded-md text-xs font-bold flex items-center gap-1 transition ${view === 'list' ? 'bg-white dark:bg-slate-700 shadow-sm text-slate-900 dark:text-white' : 'text-gray-500'}`}>
-                             <span className="material-symbols-outlined text-sm">view_list</span> List
-                         </button>
-                         <button onClick={() => setView('calendar')} className={`px-3 py-1.5 rounded-md text-xs font-bold flex items-center gap-1 transition ${view === 'calendar' ? 'bg-white dark:bg-slate-700 shadow-sm text-slate-900 dark:text-white' : 'text-gray-500'}`}>
-                             <span className="material-symbols-outlined text-sm">calendar_month</span> Calendar
-                         </button>
-                     </div>
-                 </div>
-
-                 {/* Featured Event */}
-                 <div className="mb-12">
-                     <h3 className="text-lg font-bold text-slate-900 dark:text-white mb-4">Featured Event</h3>
-                     <div className="bg-white dark:bg-slate-800 rounded-2xl overflow-hidden shadow-sm border border-gray-100 dark:border-gray-700 grid grid-cols-1 lg:grid-cols-5">
-                         <div className="lg:col-span-3 relative h-64 lg:h-auto group">
-                             <img src="https://images.unsplash.com/photo-1511632765486-a01980e01a18?q=80&w=2670&auto=format&fit=crop" className="w-full h-full object-cover" alt="Featured" />
-                             <div className="absolute top-4 left-4 bg-white rounded-lg p-2 text-center min-w-[50px] shadow-lg">
-                                 <span className="block text-[10px] font-bold text-red-600 uppercase">OCT</span>
-                                 <span className="block text-xl font-black text-slate-900 leading-none">15</span>
-                             </div>
-                             <div className="absolute bottom-4 left-4">
-                                 <span className="bg-[#4F46E5] text-white text-[10px] font-bold px-2 py-1 rounded-full">Special Event</span>
-                             </div>
-                         </div>
-                         <div className="lg:col-span-2 p-8 flex flex-col justify-center">
-                             <div className="flex items-center gap-2 text-xs font-bold text-[#4F46E5] mb-2 uppercase tracking-wide">
-                                 Worship Night • 6:00 PM - 9:00 PM
-                             </div>
-                             <h2 className="text-2xl font-black text-slate-900 dark:text-white mb-4">Annual Harvest Thanksgiving</h2>
-                             <p className="text-gray-500 dark:text-gray-400 text-sm mb-8 leading-relaxed">
-                                 Join us for an evening of gratitude, music, and testimony as we celebrate God's faithfulness throughout the year. Bring your friends and family!
-                             </p>
-                             <div className="mt-auto">
-                                 <div className="flex items-center gap-2 text-xs text-gray-500 mb-6">
-                                     <span className="material-symbols-outlined text-lg text-[#4F46E5]">location_on</span> Grand Auditorium, CACC Main Campus
+             {/* 3. Featured Event */}
+             <section className="px-4 md:px-8 mb-16">
+                  <div className="max-w-7xl mx-auto">
+                       <h2 className="text-sm font-black text-gray-400 uppercase tracking-widest mb-6">Featured Event</h2>
+                       <div className="bg-white dark:bg-slate-800 rounded-[2.5rem] overflow-hidden shadow-xl border border-gray-100 dark:border-gray-700 grid grid-cols-1 lg:grid-cols-12">
+                            {/* Image Part */}
+                            <div className="lg:col-span-5 relative h-80 lg:h-auto">
+                                 <img src="https://images.unsplash.com/photo-1516280440614-6697288d5d38?q=80&w=2670&auto=format&fit=crop" className="w-full h-full object-cover" alt="Featured" />
+                                 <div className="absolute top-6 left-6 bg-white rounded-2xl p-3 shadow-lg flex flex-col items-center min-w-[64px]">
+                                      <span className="text-[10px] font-black text-gray-400 uppercase">OCT</span>
+                                      <span className="text-3xl font-black text-primary leading-none">15</span>
                                  </div>
-                                 <button className="w-full py-3 bg-[#4F46E5] hover:bg-[#4338ca] text-white font-bold rounded-lg shadow-md transition flex items-center justify-center gap-2">
-                                     Register Now <span className="material-symbols-outlined text-sm">arrow_forward</span>
-                                 </button>
-                             </div>
-                         </div>
-                     </div>
-                 </div>
-
-                 {/* Events Grid */}
-                 <div className="mb-8">
-                     <h3 className="text-lg font-bold text-slate-900 dark:text-white mb-4">October Events</h3>
-                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                         {UPCOMING_EVENTS.map(event => (
-                             <div key={event.id} className="bg-white dark:bg-slate-800 rounded-2xl overflow-hidden border border-gray-100 dark:border-gray-700 shadow-sm hover:shadow-md transition group flex flex-col">
-                                 <div className="relative h-48 overflow-hidden">
-                                     <img src={event.image} alt={event.title} className="w-full h-full object-cover transition duration-700 group-hover:scale-110" />
-                                     <div className="absolute top-3 left-3 bg-white rounded-md p-1.5 text-center min-w-[40px] shadow-sm">
-                                         <span className="block text-[9px] font-bold text-red-600 uppercase">{new Date(event.date).toLocaleString('default', { month: 'short' })}</span>
-                                         <span className="block text-lg font-black text-slate-900 leading-none">{new Date(event.date).getDate()}</span>
-                                     </div>
-                                     <div className="absolute bottom-3 left-3">
-                                         <span className="bg-black/50 backdrop-blur text-white text-[9px] font-bold px-2 py-1 rounded uppercase">{event.category}</span>
-                                     </div>
+                                 <div className="absolute bottom-6 left-6">
+                                      <span className="bg-primary/90 backdrop-blur text-white px-3 py-1.5 rounded-full text-[10px] font-black uppercase tracking-widest flex items-center gap-1.5 shadow-lg">
+                                           <span className="material-symbols-outlined text-sm filled text-yellow-400">star</span> Special Event
+                                      </span>
                                  </div>
-                                 <div className="p-5 flex-1 flex flex-col">
-                                     <h3 className="text-lg font-bold text-slate-900 dark:text-white mb-1 group-hover:text-[#4F46E5] transition-colors">{event.title}</h3>
-                                     
-                                     <div className="space-y-2 mt-4 mb-6">
-                                         <div className="flex items-center gap-2 text-xs text-gray-500">
-                                             <span className="material-symbols-outlined text-[#4F46E5] text-sm">schedule</span> {event.time}
-                                         </div>
-                                         <div className="flex items-center gap-2 text-xs text-gray-500">
-                                             <span className="material-symbols-outlined text-[#4F46E5] text-sm">location_on</span> {event.location}
-                                         </div>
-                                     </div>
-
-                                     <button className="mt-auto w-full py-2 bg-gray-50 dark:bg-slate-700 text-slate-700 dark:text-white text-xs font-bold rounded-lg hover:bg-gray-100 dark:hover:bg-slate-600 transition">
-                                         {event.category === 'Outreach' ? 'Volunteer' : 'View Details'}
-                                     </button>
+                            </div>
+                            {/* Content Part */}
+                            <div className="lg:col-span-7 p-8 md:p-12 flex flex-col justify-center">
+                                 <div className="flex items-center gap-2 text-xs font-black text-primary mb-4">
+                                      <span>Worship Night</span>
+                                      <span className="w-1 h-1 bg-gray-300 rounded-full"></span>
+                                      <span className="text-gray-400">6:00 PM - 8:30 PM</span>
                                  </div>
-                             </div>
-                         ))}
+                                 <h3 className="text-4xl md:text-5xl font-black text-slate-900 dark:text-white mb-6 leading-tight">Annual Harvest Thanksgiving</h3>
+                                 <p className="text-gray-500 dark:text-gray-400 text-lg mb-10 leading-relaxed">
+                                      Join us for an evening of gratitude, music, and testimony as we celebrate God's faithfulness throughout the year. Bring your friends and family!
+                                 </p>
+                                 <div className="flex flex-col sm:flex-row items-center justify-between gap-6 pt-8 border-t border-gray-100 dark:border-gray-700">
+                                      <div className="flex items-center gap-3 text-gray-500">
+                                           <span className="material-symbols-outlined text-primary">location_on</span>
+                                           <span className="text-sm font-bold">Grand Auditorium, CACC Main Campus</span>
+                                      </div>
+                                      <button className="w-full sm:w-auto px-8 py-4 bg-primary hover:bg-primary-dark text-white font-black rounded-xl shadow-lg shadow-blue-500/20 transition-all flex items-center justify-center gap-2">
+                                           Register Now <span className="material-symbols-outlined">arrow_forward</span>
+                                      </button>
+                                 </div>
+                            </div>
+                       </div>
+                  </div>
+             </section>
 
-                         {/* Host Event Card */}
-                         <div className="bg-blue-50 dark:bg-slate-800/50 rounded-2xl p-8 border-2 border-dashed border-blue-200 dark:border-gray-700 flex flex-col items-center justify-center text-center h-full min-h-[300px]">
-                             <div className="size-12 bg-white dark:bg-slate-700 rounded-full flex items-center justify-center text-[#4F46E5] shadow-sm mb-4">
-                                 <span className="material-symbols-outlined">calendar_add_on</span>
-                             </div>
-                             <h3 className="text-lg font-bold text-slate-900 dark:text-white mb-2">Host an Event?</h3>
-                             <p className="text-xs text-gray-500 dark:text-gray-400 max-w-xs mb-6">Ministry leaders can submit event requests for approval directly through the portal.</p>
-                             <button className="text-[#4F46E5] text-xs font-bold hover:underline">Submit Request</button>
-                         </div>
-                     </div>
-                 </div>
+             {/* 4. Events Grid */}
+             <section className="px-4 md:px-8 mb-20">
+                  <div className="max-w-7xl mx-auto">
+                       <h2 className="text-sm font-black text-gray-400 uppercase tracking-widest mb-8">October Events</h2>
+                       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                            {UPCOMING_EVENTS.map(event => (
+                                <div key={event.id} className="bg-white dark:bg-slate-800 rounded-[2rem] overflow-hidden shadow-sm border border-gray-100 dark:border-gray-700 group hover:shadow-xl transition-all duration-300 flex flex-col">
+                                     <div className="relative h-56 overflow-hidden">
+                                          <img src={event.image} className="w-full h-full object-cover transition duration-700 group-hover:scale-110" alt={event.title} />
+                                          <div className="absolute top-4 left-4 bg-white/95 backdrop-blur rounded-xl p-2 min-w-[50px] flex flex-col items-center shadow-md">
+                                               <span className="text-[8px] font-black text-gray-400 uppercase">OCT</span>
+                                               <span className="text-xl font-black text-primary leading-none">{event.date.split('-')[2]}</span>
+                                          </div>
+                                          <div className="absolute bottom-4 left-4">
+                                               <span className="bg-black/40 backdrop-blur px-2 py-1 rounded text-[9px] font-bold text-white uppercase tracking-wider">{event.tag}</span>
+                                          </div>
+                                     </div>
+                                     <div className="p-8 flex-1 flex flex-col">
+                                          <h3 className="text-2xl font-black text-slate-900 dark:text-white mb-4 group-hover:text-primary transition-colors">{event.title}</h3>
+                                          <div className="space-y-3 mb-8 text-gray-500 dark:text-gray-400">
+                                               <div className="flex items-center gap-2 text-xs font-bold">
+                                                    <span className="material-symbols-outlined text-primary text-lg">schedule</span>
+                                                    {event.time}
+                                               </div>
+                                               <div className="flex items-center gap-2 text-xs font-bold">
+                                                    <span className="material-symbols-outlined text-primary text-lg">location_on</span>
+                                                    {event.location}
+                                               </div>
+                                          </div>
+                                          <button className={`w-full py-3.5 rounded-xl font-black text-sm transition-all border ${
+                                              event.id === '1' ? 'bg-background-off text-slate-900 border-transparent hover:bg-gray-200' :
+                                              event.id === '2' ? 'bg-primary/5 text-primary border-primary/20 hover:bg-primary hover:text-white' :
+                                              event.id === '3' ? 'bg-background-off text-slate-900 border-transparent hover:bg-gray-200' :
+                                              'bg-primary text-white border-primary hover:bg-primary-dark shadow-md'
+                                          }`}>
+                                              {event.id === '1' ? 'View Details' : event.id === '2' ? 'RSVP' : event.id === '3' ? 'Volunteer' : 'Register'}
+                                          </button>
+                                     </div>
+                                </div>
+                            ))}
+                            
+                            {/* Host an Event Card */}
+                            <div className="bg-white dark:bg-slate-800 rounded-[2rem] p-8 border border-dashed border-gray-200 dark:border-gray-700 flex flex-col items-center justify-center text-center group hover:border-primary transition-colors">
+                                 <div className="size-14 rounded-2xl bg-primary/5 text-primary flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                                      <span className="material-symbols-outlined text-3xl">add_calendar</span>
+                                 </div>
+                                 <h3 className="text-2xl font-black text-slate-900 dark:text-white mb-3">Host an Event?</h3>
+                                 <p className="text-gray-500 dark:text-gray-400 text-sm mb-6 max-w-[200px]">Ministry leaders can submit event requests for approval.</p>
+                                 <button className="text-primary font-black text-sm hover:underline">Submit Request</button>
+                            </div>
+                       </div>
 
-                 {/* Pagination */}
-                 <div className="flex justify-center mb-16">
-                     <div className="flex gap-2">
-                         <button className="size-8 rounded-lg border border-gray-200 dark:border-gray-700 flex items-center justify-center hover:bg-gray-50 dark:hover:bg-slate-800 text-gray-400"><span className="material-symbols-outlined text-sm">chevron_left</span></button>
-                         <button className="size-8 rounded-lg bg-[#4F46E5] text-white font-bold text-xs">1</button>
-                         <button className="size-8 rounded-lg border border-gray-200 dark:border-gray-700 flex items-center justify-center hover:bg-gray-50 dark:hover:bg-slate-800 text-gray-600 dark:text-gray-400 font-bold text-xs">2</button>
-                         <button className="size-8 rounded-lg border border-gray-200 dark:border-gray-700 flex items-center justify-center hover:bg-gray-50 dark:hover:bg-slate-800 text-gray-600 dark:text-gray-400 font-bold text-xs">3</button>
-                         <span className="flex items-center text-gray-400 text-xs">...</span>
-                         <button className="size-8 rounded-lg border border-gray-200 dark:border-gray-700 flex items-center justify-center hover:bg-gray-50 dark:hover:bg-slate-800 text-gray-600 dark:text-gray-400"><span className="material-symbols-outlined text-sm">chevron_right</span></button>
-                     </div>
-                 </div>
+                       {/* Pagination */}
+                       <div className="flex justify-center mt-16 gap-2">
+                            <button className="size-10 rounded-full border border-gray-200 dark:border-gray-700 flex items-center justify-center text-gray-400 hover:text-primary hover:border-primary transition"><span className="material-symbols-outlined">chevron_left</span></button>
+                            <button className="size-10 rounded-full bg-primary text-white font-black text-sm shadow-lg shadow-blue-500/20">1</button>
+                            <button className="size-10 rounded-full border border-gray-200 dark:border-gray-700 font-black text-sm text-gray-500 hover:text-primary hover:border-primary transition">2</button>
+                            <button className="size-10 rounded-full border border-gray-200 dark:border-gray-700 font-black text-sm text-gray-500 hover:text-primary hover:border-primary transition">3</button>
+                            <button className="size-10 rounded-full border border-gray-200 dark:border-gray-700 flex items-center justify-center text-gray-400 hover:text-primary hover:border-primary transition"><span className="material-symbols-outlined">chevron_right</span></button>
+                       </div>
+                  </div>
+             </section>
 
-                 {/* Newsletter Section Reused */}
-                 <div className="bg-[#EFF6FF] dark:bg-slate-800/30 rounded-3xl p-10 md:p-16 text-center">
-                     <div className="inline-flex size-12 bg-blue-100 text-[#4F46E5] rounded-xl items-center justify-center mb-6">
-                         <span className="material-symbols-outlined text-2xl">mail</span>
-                     </div>
-                     <h2 className="text-3xl font-black text-slate-900 dark:text-white mb-2">Stay Connected</h2>
-                     <p className="text-gray-500 text-sm mb-8 max-w-lg mx-auto">Subscribe to our weekly newsletter to get the latest updates on events, sermons, and community news delivered to your inbox.</p>
-                     
-                     <div className="flex flex-col sm:flex-row gap-2 max-w-md mx-auto">
-                         <input type="email" placeholder="Enter your email address" className="flex-1 px-4 py-3 rounded-lg border border-gray-200 dark:border-gray-700 text-sm focus:ring-2 focus:ring-[#4F46E5] outline-none" />
-                         <button className="px-6 py-3 bg-[#4F46E5] hover:bg-[#4338ca] text-white font-bold rounded-lg text-sm shadow-md transition">Subscribe</button>
-                     </div>
-                     <p className="text-[10px] text-gray-400 mt-4">We respect your privacy. Unsubscribe at any time.</p>
-                 </div>
-             </div>
+             {/* 5. Stay Connected (Redesigned) */}
+             <section className="px-4 md:px-8">
+                  <div className="max-w-4xl mx-auto bg-white dark:bg-slate-800 rounded-[2.5rem] p-8 md:p-12 text-center border border-gray-100 dark:border-gray-700 shadow-sm relative overflow-hidden">
+                       <div className="size-12 rounded-full bg-primary/5 text-primary flex items-center justify-center mx-auto mb-6">
+                            <span className="material-symbols-outlined text-2xl">mail</span>
+                       </div>
+                       <h2 className="text-3xl font-black text-slate-900 dark:text-white mb-4">Stay Connected</h2>
+                       <p className="text-gray-500 dark:text-gray-400 text-sm mb-10 max-w-lg mx-auto">Subscribe to our weekly newsletter to get the latest updates on events, sermons, and community news delivered to your inbox.</p>
+                       <div className="flex flex-col sm:flex-row gap-3 max-w-md mx-auto">
+                            <input type="email" placeholder="Enter your email address" className="flex-1 px-6 py-3 rounded-xl bg-gray-50 dark:bg-slate-900 border border-gray-100 dark:border-gray-700 text-sm focus:ring-1 focus:ring-primary outline-none" />
+                            <button className="px-8 py-3 bg-primary hover:bg-primary-dark text-white font-black rounded-xl shadow-lg transition whitespace-nowrap">Subscribe</button>
+                       </div>
+                       <p className="text-[10px] text-gray-400 mt-4 uppercase font-bold">We respect your privacy. Unsubscribe at any time.</p>
+                  </div>
+             </section>
         </div>
     );
 };
