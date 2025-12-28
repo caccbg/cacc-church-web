@@ -8,10 +8,10 @@ import BibleReader from '../components/BibleReader';
 
 // --- MOCK DATA ---
 const MOCK_SERMONS: Sermon[] = [
-  { id: '1', title: 'Walking on Water', preacher: 'Pastor Sarah Jenkins', date: 'Oct 17, 2023', category: 'Faith Series', duration: '45:20', thumbnail: 'https://images.unsplash.com/photo-1491841550275-ad7854e35ca6?q=80&w=2574&auto=format&fit=crop', description: 'Learning to step out in faith.', videoUrl: '', views: 3200 },
-  { id: '2', title: 'Understanding Grace', preacher: 'Pastor John Doe', date: 'Oct 10, 2023', category: 'Faith Series', duration: '38:15', thumbnail: 'https://images.unsplash.com/photo-1504052434569-70ad5836ab65?q=80&w=2670&auto=format&fit=crop', description: 'A deep dive into unmerited favor.', videoUrl: '', views: 2800 },
-  { id: '3', title: 'Kingdom Finance', preacher: 'Bishop David', date: 'Oct 03, 2023', category: 'Finance', duration: '50:10', thumbnail: 'https://images.unsplash.com/photo-1621255776269-e0c158580552?q=80&w=2670&auto=format&fit=crop', description: 'Biblical principles of wealth.', videoUrl: '', views: 5100, progress: 75 },
-  { id: '4', title: 'The Art of Prayer', preacher: 'Pastor Sarah Jenkins', date: 'Sep 24, 2023', category: 'Prayer', duration: '42:00', thumbnail: 'https://images.unsplash.com/photo-1438232992991-995b7058bbb3?q=80&w=2673&auto=format&fit=crop', description: 'How to pray effectively.', videoUrl: '', views: 1500, progress: 30 },
+  { id: '1', title: 'The Power of Persistent Prayer', preacher: 'Pastor Sarah', date: 'Oct 25, 2023', category: 'Sunday Service', duration: '45:20', thumbnail: 'https://images.unsplash.com/photo-1544928147-7972fc53599e?q=80&w=2574&auto=format&fit=crop', description: 'Pastor Sarah explores the biblical foundations of prayer and how it...', videoUrl: '', views: 3200 },
+  { id: '2', title: 'Grace in the New Testament', preacher: 'Rev. Michael', date: 'Oct 18, 2023', category: 'Bible Study', duration: '32:15', thumbnail: 'https://images.unsplash.com/photo-1504052434569-70ad5836ab65?q=80&w=2670&auto=format&fit=crop', description: 'A deep dive into the concept of grace in the New Testament and its...', videoUrl: '', views: 2800 },
+  { id: '3', title: 'Worship and Intercession', preacher: 'Worship Team', date: 'Oct 11, 2023', category: 'Prayer & Worship', duration: '1:15:00', thumbnail: 'https://images.unsplash.com/photo-1516280440614-6697288d5d38?q=80&w=2670&auto=format&fit=crop', description: 'An evening of deep worship and intercession led by the CACC Worshi...', videoUrl: '', views: 5100 },
+  { id: '4', title: 'Walking by Faith', preacher: 'Pastor David', date: 'Oct 04, 2023', category: 'Sunday Service', duration: '28:40', thumbnail: 'https://images.unsplash.com/photo-1510915361408-d5965ce7f59b?q=80&w=2670&auto=format&fit=crop', description: 'Learning to step out in faith even when the path ahead isn\'t clear.', videoUrl: '', views: 1500 },
 ];
 
 const ANNOUNCEMENTS: Announcement[] = [
@@ -200,7 +200,7 @@ const ChatSidebar: React.FC<{ isOpen: boolean, onClose: () => void }> = ({ isOpe
                       value={input}
                       onChange={(e) => setInput(e.target.value)}
                       onKeyDown={(e) => e.key === 'Enter' && handleSend()}
-                      className="flex-1 rounded-full border-none px-4 py-2 bg-white dark:bg-slate-800 text-sm focus:ring-1 focus:ring-primary dark:text-white"
+                      className="flex-1 rounded-full border-none px-4 py-2 bg-white dark:bg-slate-800 text-sm focus:ring-2 focus:ring-primary dark:text-white"
                       placeholder="Type a message..."
                    />
                    <button onClick={handleSend} className="p-2 bg-primary text-white rounded-full hover:bg-primary-dark transition"><span className="material-symbols-outlined text-xl ml-0.5">send</span></button>
@@ -604,13 +604,11 @@ export const Giving: React.FC = () => {
     return (
         <div className="bg-[#F8F9FC] dark:bg-slate-950 min-h-screen py-12 px-4 font-sans">
             <div className="max-w-5xl mx-auto">
-                {/* Page Title */}
                 <div className="text-center mb-12">
                     <h1 className="text-4xl font-extrabold text-slate-900 dark:text-white mb-2">Giving & Offerings</h1>
                     <p className="text-gray-500 dark:text-gray-400 font-medium">Honor the Lord with your substance.</p>
                 </div>
 
-                {/* Quote Block */}
                 <div className="bg-[#EBF5FF] dark:bg-blue-900/10 rounded-2xl p-8 mb-12 relative border border-blue-50 dark:border-blue-900/20 text-center">
                      <span className="material-symbols-outlined text-blue-300 dark:text-blue-800 absolute top-4 left-6 text-4xl select-none filled">format_quote</span>
                      <p className="text-primary dark:text-blue-300 font-bold italic leading-relaxed max-w-2xl mx-auto">
@@ -619,10 +617,7 @@ export const Giving: React.FC = () => {
                      <p className="text-primary dark:text-blue-400 text-xs font-bold mt-4 uppercase tracking-[0.2em]">— 2 CORINTHIANS 9:7</p>
                 </div>
 
-                {/* Main Giving Form Card */}
                 <div className="bg-white dark:bg-slate-900 rounded-[2.5rem] shadow-2xl border border-gray-100 dark:border-gray-800 overflow-hidden">
-                    
-                    {/* Multi-Step Indicator */}
                     <div className="bg-gray-50 dark:bg-slate-800/50 px-8 py-6 border-b border-gray-100 dark:border-gray-800 flex items-center justify-center">
                         <div className="flex items-center gap-4 text-[10px] font-bold tracking-widest uppercase">
                             <div className="flex items-center gap-2 text-green-500">
@@ -641,33 +636,20 @@ export const Giving: React.FC = () => {
                             </div>
                         </div>
                     </div>
-
                     <div className="p-8 md:p-12">
                         <div className="flex flex-col lg:flex-row gap-12">
-                            {/* Left Content: Form Sections */}
                             <div className="flex-1 space-y-12">
-                                
-                                {/* 1. Select Fund */}
                                 <div>
                                     <div className="flex justify-between items-center mb-6">
                                         <div className="flex items-center gap-3">
                                             <span className="size-6 rounded bg-blue-50 dark:bg-blue-900/20 text-primary dark:text-blue-400 flex items-center justify-center text-xs font-bold shadow-sm">1</span>
                                             <h3 className="font-black text-slate-900 dark:text-white uppercase tracking-wider text-sm">Select Fund</h3>
                                         </div>
-                                        <button className="text-[10px] font-bold text-gray-400 hover:text-primary underline uppercase tracking-widest">What are these?</button>
                                     </div>
                                     <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                                         {funds.map(fund => (
-                                            <button 
-                                                key={fund.id}
-                                                onClick={() => setSelectedFund(fund.id)}
-                                                className={`relative p-5 rounded-2xl border-2 transition-all flex flex-col items-center justify-center text-center h-36 ${selectedFund === fund.id ? 'border-primary dark:border-blue-500 bg-blue-50/30 dark:bg-blue-900/10' : 'border-gray-50 dark:border-gray-800 hover:border-gray-100 dark:hover:border-gray-700 bg-white dark:bg-slate-800'}`}
-                                            >
-                                                {selectedFund === fund.id && (
-                                                    <div className="absolute top-3 right-3 size-5 rounded-full bg-primary dark:bg-blue-600 text-white flex items-center justify-center">
-                                                        <span className="material-symbols-outlined text-[14px] filled">check</span>
-                                                    </div>
-                                                )}
+                                            <button key={fund.id} onClick={() => setSelectedFund(fund.id)} className={`relative p-5 rounded-2xl border-2 transition-all flex flex-col items-center justify-center text-center h-36 ${selectedFund === fund.id ? 'border-primary dark:border-blue-500 bg-blue-50/30 dark:bg-blue-900/10' : 'border-gray-50 dark:border-gray-800 hover:border-gray-100 dark:hover:border-gray-700 bg-white dark:bg-slate-800'}`}>
+                                                {selectedFund === fund.id && <div className="absolute top-3 right-3 size-5 rounded-full bg-primary dark:bg-blue-600 text-white flex items-center justify-center"><span className="material-symbols-outlined text-[14px] filled">check</span></div>}
                                                 <span className={`material-symbols-outlined text-3xl mb-4 ${selectedFund === fund.id ? 'text-primary dark:text-blue-400' : 'text-gray-400'}`}>{fund.icon}</span>
                                                 <p className={`font-black text-xs mb-1 ${selectedFund === fund.id ? 'text-slate-900 dark:text-white' : 'text-gray-600 dark:text-gray-400'}`}>{fund.label}</p>
                                                 <p className="text-[9px] text-gray-400 font-bold uppercase tracking-tight line-clamp-1">{fund.desc}</p>
@@ -675,148 +657,20 @@ export const Giving: React.FC = () => {
                                         ))}
                                     </div>
                                 </div>
-
-                                {/* 2. Your Gift */}
                                 <div>
                                     <div className="flex items-center gap-3 mb-6">
                                         <span className="size-6 rounded bg-blue-50 dark:bg-blue-900/20 text-primary dark:text-blue-400 flex items-center justify-center text-xs font-bold shadow-sm">2</span>
                                         <h3 className="font-black text-slate-900 dark:text-white uppercase tracking-wider text-sm">Your Gift</h3>
                                     </div>
-                                    <p className="text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-3">Amount (KES)</p>
                                     <div className="flex flex-col md:flex-row items-center gap-6">
                                         <div className="flex-1 w-full relative">
-                                            <div className="absolute inset-y-0 left-6 flex items-center pointer-events-none">
-                                                <span className="text-gray-400 font-black text-lg">KES</span>
-                                            </div>
-                                            <input 
-                                                type="text" 
-                                                value={amount}
-                                                onChange={e => setAmount(e.target.value)}
-                                                className="w-full bg-gray-50 dark:bg-slate-800 border-none rounded-2xl py-6 pl-16 pr-6 text-3xl font-black text-slate-900 dark:text-white focus:ring-2 focus:ring-primary shadow-inner"
-                                                placeholder="0.00"
-                                            />
-                                        </div>
-                                        <div className="flex gap-2 w-full md:w-auto overflow-x-auto no-scrollbar pb-1 md:pb-0">
-                                            {['500', '1500', '5000', '10,000'].map(val => (
-                                                <button 
-                                                    key={val} 
-                                                    onClick={() => setAmount(val.replace(',', ''))}
-                                                    className={`px-5 py-2.5 rounded-xl text-xs font-black transition-all whitespace-nowrap ${amount === val.replace(',', '') ? 'bg-primary dark:bg-blue-600 text-white shadow-lg shadow-blue-500/20' : 'bg-gray-100 dark:bg-slate-800 text-gray-500 dark:text-gray-400 hover:bg-gray-200'}`}
-                                                >
-                                                    {val}
-                                                </button>
-                                            ))}
+                                            <input type="text" value={amount} onChange={e => setAmount(e.target.value)} className="w-full bg-gray-50 dark:bg-slate-800 border-none rounded-2xl py-6 pl-6 pr-6 text-3xl font-black text-slate-900 dark:text-white focus:ring-2 focus:ring-primary shadow-inner" placeholder="0.00" />
                                         </div>
                                     </div>
-                                </div>
-
-                                {/* 3. Payment Method */}
-                                <div>
-                                    <div className="flex items-center gap-3 mb-6">
-                                        <span className="size-6 rounded bg-blue-50 dark:bg-blue-900/20 text-primary dark:text-blue-400 flex items-center justify-center text-xs font-bold shadow-sm">3</span>
-                                        <h3 className="font-black text-slate-900 dark:text-white uppercase tracking-wider text-sm">Payment Method</h3>
-                                    </div>
-                                    <div className="bg-gray-50 dark:bg-slate-800/50 p-1.5 rounded-2xl flex gap-2 mb-8 w-fit shadow-inner">
-                                        {[
-                                            { id: 'mpesa', label: 'M-PESA', icon: 'smartphone' },
-                                            { id: 'card', label: 'Card', icon: 'credit_card' },
-                                            { id: 'bank', label: 'Bank', icon: 'account_balance' }
-                                        ].map(m => (
-                                            <button 
-                                                key={m.id}
-                                                onClick={() => setMethod(m.id)}
-                                                className={`px-8 py-3 rounded-xl text-xs font-black flex items-center gap-2.5 transition-all ${method === m.id ? 'bg-white dark:bg-slate-700 text-slate-900 dark:text-white shadow-md' : 'text-gray-400 hover:text-gray-600'}`}
-                                            >
-                                                <span className={`material-symbols-outlined text-[18px] ${method === m.id ? 'filled text-primary' : ''}`}>{m.icon}</span> {m.label}
-                                            </button>
-                                        ))}
-                                    </div>
-
-                                    {/* M-PESA Specific Content */}
-                                    {method === 'mpesa' && (
-                                        <div className="bg-gray-50/50 dark:bg-slate-800/30 rounded-3xl p-8 border border-gray-100 dark:border-gray-800 flex flex-col md:flex-row gap-10 items-center">
-                                            <div className="flex-1 w-full space-y-5">
-                                                <div className="flex justify-between items-center">
-                                                    <label className="text-[10px] font-black text-gray-400 uppercase tracking-widest">M-PESA Phone Number</label>
-                                                    <span className="bg-green-100 dark:bg-green-900/30 text-green-600 dark:text-green-400 text-[9px] font-black px-3 py-1 rounded-full flex items-center gap-1 shadow-sm">
-                                                        <span className="material-symbols-outlined text-[12px] filled">bolt</span> INSTANT
-                                                    </span>
-                                                </div>
-                                                <div className="relative">
-                                                    <span className="material-symbols-outlined absolute left-5 top-1/2 -translate-y-1/2 text-gray-400">call</span>
-                                                    <input 
-                                                        type="text" 
-                                                        placeholder="07XX XXX XXX" 
-                                                        className="w-full bg-white dark:bg-slate-900 border-gray-100 dark:border-gray-700 rounded-2xl py-5 pl-14 pr-6 text-sm font-bold text-slate-900 dark:text-white focus:ring-2 focus:ring-primary transition-all shadow-sm"
-                                                    />
-                                                </div>
-                                                <div className="flex gap-4 p-1">
-                                                    <div className="size-6 rounded-full bg-blue-100 dark:bg-blue-900/30 text-primary dark:text-blue-400 flex items-center justify-center shrink-0 mt-0.5">
-                                                        <span className="material-symbols-outlined text-[14px] filled">info</span>
-                                                    </div>
-                                                    <p className="text-[11px] text-gray-400 leading-relaxed font-medium italic">
-                                                        You will receive an STK push on your phone. Please unlock your device and enter your M-PESA PIN to complete the transaction.
-                                                    </p>
-                                                </div>
-                                            </div>
-                                            <div className="w-full md:w-1/3 flex flex-col items-center justify-center text-center space-y-5 py-6 md:border-l border-gray-100 dark:border-gray-800">
-                                                <div className="size-20 rounded-full bg-white dark:bg-slate-800 shadow-xl flex items-center justify-center border border-gray-50 dark:border-gray-700 animate-bounce">
-                                                     <span className="material-symbols-outlined text-gray-300 text-4xl">tap_and_play</span>
-                                                </div>
-                                                <div>
-                                                    <p className="text-xs font-black text-slate-800 dark:text-white">Check your phone</p>
-                                                    <p className="text-[10px] text-gray-400 mt-2 max-w-[140px] mx-auto leading-relaxed">A prompt will appear shortly after you click Give Now</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    )}
-                                </div>
-                            </div>
-
-                            {/* Right Sidebar: Donor Info */}
-                            <div className="lg:w-[300px] space-y-8">
-                                <div className="bg-[#F0F7FF] dark:bg-blue-900/10 rounded-[2.5rem] p-8 border border-blue-50 dark:border-blue-900/20 shadow-sm">
-                                    <p className="text-[10px] font-black text-blue-400 uppercase tracking-widest mb-8">Donor Info</p>
-                                    <div className="flex items-center gap-4 mb-6">
-                                        <div className="size-14 rounded-2xl bg-white dark:bg-slate-800 flex items-center justify-center text-primary dark:text-blue-400 font-black shadow-lg border border-blue-50 dark:border-blue-900/20 text-xl">
-                                            JD
-                                        </div>
-                                        <div>
-                                            <h4 className="text-sm font-black text-slate-900 dark:text-white">John Doe</h4>
-                                            <p className="text-[10px] font-bold text-gray-400 uppercase tracking-tight">Member #4023</p>
-                                        </div>
-                                    </div>
-                                    <button className="text-[10px] font-black text-primary dark:text-blue-400 hover:underline uppercase tracking-widest transition-colors">Not you? Switch account</button>
-                                </div>
-                                
-                                <div className="px-6 py-4">
-                                     <div className="flex items-start gap-4">
-                                         <div className="size-10 rounded-xl bg-gray-50 dark:bg-slate-800 flex items-center justify-center text-gray-300 shrink-0">
-                                            <span className="material-symbols-outlined">security</span>
-                                         </div>
-                                         <div>
-                                             <p className="text-[10px] font-black text-slate-800 dark:text-white uppercase tracking-wider mb-1">Secure Transfer</p>
-                                             <p className="text-[9px] text-gray-400 font-medium leading-relaxed">Your payment information is encrypted and never stored on our servers.</p>
-                                         </div>
-                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-
-                    {/* Footer Actions */}
-                    <div className="px-8 md:px-12 py-10 bg-gray-50/50 dark:bg-slate-800/50 border-t border-gray-100 dark:border-gray-800 flex flex-col md:flex-row items-center justify-between gap-8">
-                        <button className="text-sm font-black text-gray-400 hover:text-slate-600 transition-colors uppercase tracking-widest">Cancel</button>
-                        <div className="flex flex-col md:flex-row items-center gap-10 w-full md:w-auto">
-                            <div className="flex items-center gap-2.5 text-[10px] font-black text-gray-400 uppercase tracking-widest">
-                                <span className="material-symbols-outlined text-[18px]">lock</span> SSL Secure Payment
-                            </div>
-                            <button className="w-full md:w-auto px-12 py-5 bg-primary dark:bg-blue-600 hover:bg-primary-dark text-white font-black rounded-2xl shadow-2xl shadow-blue-500/30 transition-all transform hover:-translate-y-1 flex items-center justify-center gap-4 text-sm group">
-                                Give KES {Number(amount).toLocaleString()} <span className="material-symbols-outlined text-[20px] transition-transform group-hover:translate-x-1">arrow_forward</span>
-                            </button>
-                        </div>
-                    </div>
-
                 </div>
             </div>
         </div>
@@ -826,40 +680,218 @@ export const Giving: React.FC = () => {
 export const PrayerRequest: React.FC = () => {
     return (
         <div className="bg-gray-50 dark:bg-slate-900 min-h-screen py-12 px-4 font-sans">
-            <div className="max-w-2xl mx-auto">
-                 <div className="text-center mb-12">
-                     <h1 className="text-3xl font-black text-slate-900 dark:text-white mb-4">Prayer Request</h1>
-                 </div>
-                 <div className="bg-white dark:bg-slate-800 p-8 md:p-12 rounded-3xl shadow-xl border border-gray-100 dark:border-gray-700">
-                     <form className="space-y-6">
-                         <button type="submit" className="w-full py-4 bg-primary hover:bg-primary-dark text-white font-bold rounded-xl shadow-lg">
-                             Submit Request
-                         </button>
-                     </form>
-                 </div>
+            <div className="max-w-2xl mx-auto text-center mb-12">
+                 <h1 className="text-3xl font-black text-slate-900 dark:text-white mb-4">Prayer Request</h1>
+                 <button type="submit" className="w-full py-4 bg-primary hover:bg-primary-dark text-white font-bold rounded-xl shadow-lg">Submit Request</button>
             </div>
         </div>
     );
 };
 
+// --- REDESIGNED SERMONS & MEDIA PAGE ---
+
 export const Sermons: React.FC = () => {
+    const [activeFilter, setActiveFilter] = useState('All Messages');
+    
+    const filters = ['All Messages', 'Sunday Service', 'Bible Study', 'Youth Ministry', 'Prayer & Worship', 'Conferences'];
+    const sermonSeries = [
+        { title: 'The Book of Acts', episodes: 12, image: 'https://images.unsplash.com/photo-1544928147-7972fc53599e?q=80&w=2574&auto=format&fit=crop', desc: 'The birth of the early church and the power of the...' },
+        { title: 'Kingdom Finance', episodes: 4, image: 'https://images.unsplash.com/photo-1621255776269-e0c158580552?q=80&w=2670&auto=format&fit=crop', desc: 'Biblical principles for stewardship and generosity.' },
+        { title: 'Family Matters', episodes: 6, image: 'https://images.unsplash.com/photo-1511632765486-a01980e01a18?q=80&w=2670&auto=format&fit=crop', desc: 'Building strong, God-centered relationships at...' }
+    ];
+
+    const audioLibrary = [
+        { title: 'The Heart of Worship', meta: 'Pastor David • Romans 12:1', date: 'Oct 01', duration: '55m' },
+        { title: 'Overcoming Fear', meta: 'Pastor Sarah • 2 Timothy 1:7', date: 'Sep 24', duration: '42m' },
+        { title: 'Building a Legacy', meta: 'Rev. Michael • Proverbs 13:22', date: 'Sep 17', duration: '38m' }
+    ];
+
     return (
-        <div className="bg-gray-50 dark:bg-slate-950 min-h-screen py-12 px-4 font-sans">
-            <div className="max-w-7xl mx-auto">
-                <div className="mb-12">
-                    <h1 className="text-4xl font-black text-slate-900 dark:text-white mb-4">Sermon Library</h1>
+        <div className="bg-gray-50 dark:bg-slate-950 min-h-screen pb-32 font-sans overflow-x-hidden">
+            {/* 1. Featured Sermon Banner */}
+            <section className="relative w-full h-[500px] md:h-[600px] bg-slate-900 overflow-hidden">
+                <img 
+                    src="https://images.unsplash.com/photo-1507692049790-de58293a4697?q=80&w=2670&auto=format&fit=crop" 
+                    className="w-full h-full object-cover opacity-60" 
+                    alt="Featured Preacher" 
+                />
+                <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/40 to-transparent"></div>
+                
+                <div className="absolute inset-0 flex flex-col justify-center px-4 md:px-20 lg:px-40 text-white max-w-7xl mx-auto">
+                    <div className="bg-primary/80 backdrop-blur-md px-3 py-1.5 rounded-full text-[10px] font-black uppercase tracking-widest border border-white/20 mb-8 w-fit flex items-center gap-2">
+                        <span className="material-symbols-outlined text-sm filled text-yellow-400">star</span> FEATURED SERMON
+                    </div>
+                    <h1 className="text-4xl md:text-7xl font-black mb-4 leading-tight">Walking in Divine Purpose</h1>
+                    <p className="text-lg md:text-xl font-bold text-gray-300 mb-6 uppercase tracking-wider">This Week's Message | Pastor David | Romans 8:28</p>
+                    <p className="text-base md:text-lg text-gray-400 max-w-2xl mb-10 leading-relaxed">
+                        Discover how God orchestrates every event in your life for a greater purpose. Join us as we explore the depth of His promise and learn to trust His timing in every season.
+                    </p>
+                    <div className="flex flex-wrap gap-4">
+                        <button className="px-8 py-4 bg-primary hover:bg-blue-600 text-white font-black rounded-xl shadow-xl shadow-blue-500/20 transition-all flex items-center gap-3">
+                            <span className="material-symbols-outlined filled">play_arrow</span> Watch Now
+                        </button>
+                        <button className="px-8 py-4 bg-white/10 backdrop-blur-md border border-white/20 text-white font-black rounded-xl hover:bg-white/20 transition-all flex items-center gap-3">
+                            <span className="material-symbols-outlined">headphones</span> Listen Audio
+                        </button>
+                        <button className="px-8 py-4 bg-white/10 backdrop-blur-md border border-white/20 text-white font-black rounded-xl hover:bg-white/20 transition-all flex items-center gap-3">
+                            <span className="material-symbols-outlined">description</span> Notes
+                        </button>
+                    </div>
                 </div>
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-                    {MOCK_SERMONS.map(sermon => (
-                        <div key={sermon.id} className="bg-white dark:bg-slate-800 rounded-2xl overflow-hidden shadow-sm border border-gray-100 dark:border-gray-700 group hover:shadow-xl transition-all">
-                            <img src={sermon.thumbnail} alt={sermon.title} className="w-full aspect-video object-cover" />
-                            <div className="p-5">
-                                <h3 className="font-bold text-slate-900 dark:text-white mb-1 line-clamp-1 group-hover:text-primary transition">{sermon.title}</h3>
-                                <p className="text-xs text-gray-500 dark:text-gray-400 mb-4">{sermon.preacher}</p>
-                                <button className="w-full py-2 bg-gray-50 dark:bg-slate-700 text-slate-700 dark:text-gray-200 text-xs font-bold rounded-lg hover:bg-primary hover:text-white transition">Watch Now</button>
-                            </div>
-                        </div>
+            </section>
+
+            <div className="max-w-7xl mx-auto px-4 md:px-8 -mt-12 relative z-20 space-y-16">
+                {/* 2. Filter Bar */}
+                <div className="flex overflow-x-auto gap-3 no-scrollbar py-4 scroll-smooth">
+                    {filters.map(filter => (
+                        <button 
+                            key={filter} 
+                            onClick={() => setActiveFilter(filter)}
+                            className={`px-6 py-2.5 rounded-full font-black text-xs uppercase tracking-widest transition-all whitespace-nowrap border ${activeFilter === filter ? 'bg-primary border-primary text-white shadow-lg' : 'bg-white dark:bg-slate-800 text-gray-500 border-gray-100 dark:border-gray-700 hover:border-primary/50'}`}
+                        >
+                            {filter}
+                        </button>
                     ))}
+                </div>
+
+                {/* 3. Recent Uploads Section */}
+                <section>
+                    <div className="flex justify-between items-end mb-8">
+                        <h2 className="text-2xl font-black text-slate-900 dark:text-white">Recent Uploads</h2>
+                        <button className="text-primary dark:text-blue-400 font-black text-xs uppercase tracking-widest flex items-center gap-2 hover:underline">
+                            View Archive <span className="material-symbols-outlined text-sm">arrow_forward</span>
+                        </button>
+                    </div>
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                        {MOCK_SERMONS.map(sermon => (
+                            <div key={sermon.id} className="bg-white dark:bg-slate-900 rounded-[2rem] overflow-hidden shadow-sm border border-gray-100 dark:border-gray-800 flex flex-col group hover:shadow-xl transition-all duration-300">
+                                <div className="relative aspect-video overflow-hidden">
+                                    <img src={sermon.thumbnail} className="w-full h-full object-cover transition duration-700 group-hover:scale-110" alt={sermon.title} />
+                                    <div className="absolute inset-0 bg-black/20 group-hover:bg-black/40 transition"></div>
+                                    <div className="absolute bottom-3 right-3 bg-black/60 backdrop-blur-md text-white text-[10px] font-black px-2 py-0.5 rounded">
+                                        {sermon.duration}
+                                    </div>
+                                </div>
+                                <div className="p-6 flex-1 flex flex-col">
+                                    <h3 className="text-lg font-black text-slate-900 dark:text-white mb-2 line-clamp-1 group-hover:text-primary transition-colors">{sermon.title}</h3>
+                                    <p className="text-xs text-gray-500 dark:text-gray-400 mb-6 leading-relaxed line-clamp-2">{sermon.description}</p>
+                                    <div className="mt-auto pt-6 border-t border-gray-50 dark:border-gray-800 flex justify-between items-center">
+                                        <div className="flex items-center gap-2 text-slate-700 dark:text-gray-300">
+                                            <span className="material-symbols-outlined text-sm filled text-gray-400">person</span>
+                                            <span className="text-[10px] font-black uppercase tracking-tighter">{sermon.preacher}</span>
+                                        </div>
+                                        <button className="p-1 text-gray-400 hover:text-slate-900 dark:hover:text-white transition"><span className="material-symbols-outlined">more_vert</span></button>
+                                    </div>
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+                </section>
+
+                {/* 4. Sermon Series Section */}
+                <section>
+                    <div className="flex justify-between items-center mb-8">
+                        <h2 className="text-2xl font-black text-slate-900 dark:text-white">Sermon Series</h2>
+                        <div className="flex gap-2">
+                            <button className="size-10 rounded-full border border-gray-200 dark:border-gray-700 flex items-center justify-center text-gray-400 hover:text-primary transition"><span className="material-symbols-outlined">chevron_left</span></button>
+                            <button className="size-10 rounded-full border border-gray-200 dark:border-gray-700 flex items-center justify-center text-gray-400 hover:text-primary transition"><span className="material-symbols-outlined">chevron_right</span></button>
+                        </div>
+                    </div>
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+                        {sermonSeries.map((series, idx) => (
+                            <div key={idx} className="relative aspect-[16/10] rounded-[2rem] overflow-hidden group cursor-pointer shadow-lg">
+                                <img src={series.image} className="w-full h-full object-cover transition duration-700 group-hover:scale-110" alt={series.title} />
+                                <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent"></div>
+                                <div className="absolute top-4 left-4">
+                                    <span className="bg-white/20 backdrop-blur-md text-white text-[10px] font-black px-3 py-1 rounded-full border border-white/20">
+                                        {series.episodes} Episodes
+                                    </span>
+                                </div>
+                                <div className="absolute bottom-6 left-6 text-white pr-6">
+                                    <h3 className="text-2xl font-black mb-1">{series.title}</h3>
+                                    <p className="text-xs text-gray-400 font-medium leading-relaxed">{series.desc}</p>
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+                </section>
+
+                {/* 5. Audio Library List */}
+                <section className="pb-20">
+                    <div className="flex justify-between items-end mb-8">
+                        <h2 className="text-2xl font-black text-slate-900 dark:text-white">Audio Library</h2>
+                        <button className="text-primary dark:text-blue-400 font-black text-xs uppercase tracking-widest flex items-center gap-2 hover:underline">
+                            View All Audio <span className="material-symbols-outlined text-sm">arrow_forward</span>
+                        </button>
+                    </div>
+                    <div className="space-y-3">
+                        {audioLibrary.map((audio, idx) => (
+                            <div key={idx} className="bg-white dark:bg-slate-900 p-5 rounded-2xl flex items-center gap-6 group hover:shadow-lg transition-all border border-gray-50 dark:border-gray-800">
+                                <button className="size-10 rounded-full bg-primary/5 text-primary flex items-center justify-center shrink-0 group-hover:bg-primary group-hover:text-white transition-all shadow-sm">
+                                    <span className="material-symbols-outlined filled text-xl ml-0.5">play_arrow</span>
+                                </button>
+                                <div className="flex-1">
+                                    <h4 className="font-black text-slate-900 dark:text-white group-hover:text-primary transition-colors">{audio.title}</h4>
+                                    <p className="text-xs text-gray-500 font-medium">{audio.meta}</p>
+                                </div>
+                                <div className="hidden md:flex items-center gap-8 text-[10px] font-black text-gray-400 uppercase tracking-widest">
+                                    <div className="flex items-center gap-2"><span className="material-symbols-outlined text-sm">calendar_month</span> {audio.date}</div>
+                                    <div className="flex items-center gap-2"><span className="material-symbols-outlined text-sm">schedule</span> {audio.duration}</div>
+                                </div>
+                                <button className="p-2 text-gray-300 hover:text-primary transition-colors"><span className="material-symbols-outlined">download</span></button>
+                            </div>
+                        ))}
+                    </div>
+                </section>
+            </div>
+
+            {/* 6. Floating Audio Player */}
+            <div className="fixed bottom-0 left-0 right-0 z-[100] bg-white/95 dark:bg-slate-900/95 backdrop-blur-xl border-t border-gray-100 dark:border-gray-800 px-4 md:px-12 py-3 shadow-[0_-10px_30px_rgba(0,0,0,0.05)]">
+                <div className="max-w-[1600px] mx-auto flex items-center justify-between gap-4">
+                    {/* Track Info */}
+                    <div className="flex items-center gap-4 min-w-0 flex-1 md:flex-none">
+                        <img src="https://images.unsplash.com/photo-1544928147-7972fc53599e?q=80&w=2574&auto=format&fit=crop" className="size-12 rounded-lg object-cover shadow-sm" alt="Current track" />
+                        <div className="min-w-0">
+                            <h4 className="text-sm font-black text-slate-900 dark:text-white truncate">The Power of Persistent Prayer</h4>
+                            <p className="text-[10px] text-gray-500 font-bold uppercase truncate">Pastor Sarah • Sunday Service</p>
+                        </div>
+                    </div>
+
+                    {/* Controls & Progress */}
+                    <div className="flex-1 max-w-2xl hidden lg:flex flex-col items-center gap-2">
+                        <div className="flex items-center gap-8 text-slate-700 dark:text-gray-300">
+                            <button className="p-1 hover:text-primary transition"><span className="material-symbols-outlined text-xl">shuffle</span></button>
+                            <button className="p-1 hover:text-primary transition"><span className="material-symbols-outlined text-xl filled">skip_previous</span></button>
+                            <button className="size-10 rounded-full bg-primary text-white flex items-center justify-center hover:scale-105 transition shadow-lg shadow-blue-500/20">
+                                <span className="material-symbols-outlined text-2xl filled ml-0.5">pause</span>
+                            </button>
+                            <button className="p-1 hover:text-primary transition"><span className="material-symbols-outlined text-xl filled">skip_next</span></button>
+                            <button className="p-1 hover:text-primary transition"><span className="material-symbols-outlined text-xl">repeat</span></button>
+                        </div>
+                        <div className="w-full flex items-center gap-4 text-[10px] font-black text-gray-400">
+                            <span>12:45</span>
+                            <div className="flex-1 h-1.5 bg-gray-100 dark:bg-slate-800 rounded-full relative overflow-hidden group cursor-pointer">
+                                <div className="absolute h-full bg-primary w-[35%] rounded-full shadow-[0_0_8px_rgba(0,0,139,0.5)]"></div>
+                            </div>
+                            <span>45:20</span>
+                        </div>
+                    </div>
+
+                    {/* Right Utils */}
+                    <div className="flex items-center gap-6 flex-none">
+                        <div className="hidden sm:flex items-center gap-3 text-gray-400">
+                             <button className="hover:text-primary transition"><span className="material-symbols-outlined text-xl">cast</span></button>
+                             <div className="flex items-center gap-2">
+                                <span className="material-symbols-outlined text-xl">volume_up</span>
+                                <div className="w-20 h-1 bg-gray-100 dark:bg-slate-800 rounded-full overflow-hidden">
+                                    <div className="h-full bg-primary w-[70%] rounded-full"></div>
+                                </div>
+                             </div>
+                        </div>
+                        <button className="lg:hidden size-10 rounded-full bg-primary text-white flex items-center justify-center">
+                            <span className="material-symbols-outlined filled">pause</span>
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>
@@ -895,169 +927,40 @@ export const LiveStream: React.FC<{ role: UserRole }> = ({ role }) => {
 
             <section className="px-4 md:px-8 -mt-32 relative z-20 pb-20">
                 <div className="max-w-[1600px] mx-auto grid grid-cols-1 lg:grid-cols-12 gap-8">
-                    {/* Main Video Section */}
                     <div className="lg:col-span-8 flex flex-col gap-6">
                         <div className="aspect-video bg-black rounded-[2.5rem] overflow-hidden shadow-2xl relative border-8 border-white dark:border-slate-800">
-                            <img 
-                                src="https://images.unsplash.com/photo-1510915361408-d5965ce7f59b?q=80&w=2670&auto=format&fit=crop" 
-                                className="w-full h-full object-cover opacity-60" 
-                                alt="Live Stream" 
-                            />
+                            <img src="https://images.unsplash.com/photo-1510915361408-d5965ce7f59b?q=80&w=2670&auto=format&fit=crop" className="w-full h-full object-cover opacity-60" alt="Live Stream" />
                             <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
-                            
-                            {/* Overlay Controls UI */}
                             <div className="absolute top-8 left-8 flex items-center gap-4">
-                                <div className="bg-red-600 text-white text-[10px] font-black px-3 py-1.5 rounded-lg flex items-center gap-2 shadow-lg">
-                                    <span className="size-1.5 bg-white rounded-full animate-ping"></span> LIVE
-                                </div>
-                                <div className="bg-black/40 backdrop-blur-md text-white text-[10px] font-black px-3 py-1.5 rounded-lg flex items-center gap-2 shadow-lg border border-white/10">
-                                    <span className="material-symbols-outlined text-[16px] filled">visibility</span> 1,248 WATCHING
-                                </div>
+                                <div className="bg-red-600 text-white text-[10px] font-black px-3 py-1.5 rounded-lg flex items-center gap-2 shadow-lg"><span className="size-1.5 bg-white rounded-full animate-ping"></span> LIVE</div>
+                                <div className="bg-black/40 backdrop-blur-md text-white text-[10px] font-black px-3 py-1.5 rounded-lg flex items-center gap-2 shadow-lg border border-white/10"><span className="material-symbols-outlined text-[16px] filled">visibility</span> 1,248 WATCHING</div>
                             </div>
-
                             <div className="absolute inset-0 flex items-center justify-center">
-                                <button className="size-24 rounded-full bg-primary text-white flex items-center justify-center shadow-2xl hover:scale-110 transition group">
-                                    <span className="material-symbols-outlined text-5xl filled ml-1 group-hover:scale-110 transition">play_arrow</span>
-                                </button>
-                            </div>
-
-                            <div className="absolute bottom-8 left-8 right-8 flex items-center justify-between text-white">
-                                <div className="flex items-center gap-4">
-                                    <button className="p-2 hover:bg-white/20 rounded-full transition"><span className="material-symbols-outlined filled">volume_up</span></button>
-                                    <div className="h-1.5 w-32 bg-white/20 rounded-full overflow-hidden hidden sm:block">
-                                        <div className="h-full bg-white w-[70%] rounded-full shadow-[0_0_8px_white]"></div>
-                                    </div>
-                                </div>
-                                <div className="flex items-center gap-4">
-                                    <button className="p-2 hover:bg-white/20 rounded-full transition"><span className="material-symbols-outlined">settings</span></button>
-                                    <button className="p-2 hover:bg-white/20 rounded-full transition"><span className="material-symbols-outlined">fullscreen</span></button>
-                                </div>
+                                <button className="size-24 rounded-full bg-primary text-white flex items-center justify-center shadow-2xl hover:scale-110 transition group"><span className="material-symbols-outlined text-5xl filled ml-1 group-hover:scale-110 transition">play_arrow</span></button>
                             </div>
                         </div>
-
-                        {/* Video Metadata */}
-                        <div className="bg-white dark:bg-slate-800 rounded-[2.5rem] p-8 md:p-12 shadow-xl shadow-slate-200/50 dark:shadow-none border border-gray-100 dark:border-gray-700 flex flex-col md:flex-row justify-between items-start gap-8">
+                        <div className="bg-white dark:bg-slate-800 rounded-[2.5rem] p-8 md:p-12 shadow-xl border border-gray-100 dark:border-gray-700 flex flex-col md:flex-row justify-between items-start gap-8">
                             <div className="flex-1">
-                                <div className="flex items-center gap-3 text-primary dark:text-blue-400 font-black text-xs uppercase tracking-widest mb-4">
-                                    <span>Sunday Celebration</span>
-                                    <span className="size-1 bg-gray-300 rounded-full"></span>
-                                    <span className="text-gray-400">May 24, 2024</span>
-                                </div>
+                                <div className="flex items-center gap-3 text-primary dark:text-blue-400 font-black text-xs uppercase tracking-widest mb-4"><span>Sunday Celebration</span><span className="size-1 bg-gray-300 rounded-full"></span><span className="text-gray-400">May 24, 2024</span></div>
                                 <h1 className="text-3xl md:text-4xl font-black text-slate-900 dark:text-white mb-6 leading-tight">Walking in Divine Authority</h1>
-                                <div className="flex items-center gap-4 mb-8">
-                                    <img src="https://i.pravatar.cc/150?u=pastor_john" className="size-12 rounded-full border-2 border-primary p-0.5" />
-                                    <div>
-                                        <p className="text-sm font-black text-slate-900 dark:text-white">Pastor John Doe</p>
-                                        <p className="text-[10px] font-bold text-gray-400 uppercase tracking-widest">Senior Pastor</p>
-                                    </div>
-                                </div>
-                                <div className="prose dark:prose-invert max-w-none text-gray-500 dark:text-gray-400 text-sm leading-relaxed">
-                                    <p>Join us for our Sunday service as we dive deep into the Word of God. Today, Pastor John explores the concept of spiritual authority and how it applies to our daily walk with Christ.</p>
-                                </div>
                             </div>
-                            
                             <div className="flex flex-col gap-3 shrink-0 w-full md:w-auto">
                                 <div className="flex gap-2">
-                                    <button onClick={handleSendHeart} className="flex-1 md:flex-none px-6 py-3 bg-red-50 dark:bg-red-900/10 text-red-600 rounded-xl font-black text-xs uppercase tracking-widest flex items-center justify-center gap-2 hover:bg-red-100 transition shadow-sm">
-                                        <span className="material-symbols-outlined text-lg filled">favorite</span> {hearts}
-                                    </button>
-                                    <button className="flex-1 md:flex-none px-6 py-3 bg-blue-50 dark:bg-blue-900/10 text-primary dark:text-blue-400 rounded-xl font-black text-xs uppercase tracking-widest flex items-center justify-center gap-2 hover:bg-blue-100 transition shadow-sm">
-                                        <span className="material-symbols-outlined text-lg">share</span> SHARE
-                                    </button>
+                                    <button onClick={handleSendHeart} className="flex-1 md:flex-none px-6 py-3 bg-red-50 dark:bg-red-900/10 text-red-600 rounded-xl font-black text-xs uppercase tracking-widest flex items-center justify-center gap-2 hover:bg-red-100 transition shadow-sm"><span className="material-symbols-outlined text-lg filled">favorite</span> {hearts}</button>
+                                    <button className="flex-1 md:flex-none px-6 py-3 bg-blue-50 dark:bg-blue-900/10 text-primary dark:text-blue-400 rounded-xl font-black text-xs uppercase tracking-widest flex items-center justify-center gap-2 hover:bg-blue-100 transition shadow-sm"><span className="material-symbols-outlined text-lg">share</span> SHARE</button>
                                 </div>
-                                <button className="w-full px-6 py-4 bg-primary hover:bg-primary-dark text-white font-black rounded-xl shadow-lg shadow-blue-500/20 transition-all flex items-center justify-center gap-2">
-                                    <span className="material-symbols-outlined text-[20px]">volunteer_activism</span> SUPPORT MINISTRY
-                                </button>
+                                <button className="w-full px-6 py-4 bg-primary hover:bg-primary-dark text-white font-black rounded-xl shadow-lg transition-all flex items-center justify-center gap-2"><span className="material-symbols-outlined text-[20px]">volunteer_activism</span> SUPPORT MINISTRY</button>
                             </div>
                         </div>
                     </div>
-
-                    {/* Sidebar Area */}
-                    <div className="lg:col-span-4 flex flex-col gap-8 h-[calc(100vh-200px)] sticky top-24">
-                        <div className="bg-white dark:bg-slate-800 rounded-[2.5rem] shadow-xl shadow-slate-200/50 dark:shadow-none border border-gray-100 dark:border-gray-700 overflow-hidden flex flex-col flex-1">
-                            {/* Tabs */}
+                    <div className="lg:col-span-4 flex flex-col gap-8 sticky top-24">
+                        <div className="bg-white dark:bg-slate-800 rounded-[2.5rem] shadow-xl border border-gray-100 dark:border-gray-700 overflow-hidden flex flex-col h-[600px]">
                             <div className="flex bg-gray-50 dark:bg-slate-900/50 p-2 border-b border-gray-100 dark:border-gray-700">
                                 {['Bible', 'Chat', 'Notes'].map(tab => (
-                                    <button 
-                                        key={tab}
-                                        onClick={() => setActiveTab(tab.toLowerCase() as any)}
-                                        className={`flex-1 py-3 rounded-2xl text-[10px] font-black uppercase tracking-widest transition-all ${activeTab === tab.toLowerCase() ? 'bg-white dark:bg-slate-800 text-primary dark:text-blue-400 shadow-sm border border-gray-100 dark:border-gray-700' : 'text-gray-400 hover:text-gray-600'}`}
-                                    >
-                                        {tab}
-                                    </button>
+                                    <button key={tab} onClick={() => setActiveTab(tab.toLowerCase() as any)} className={`flex-1 py-3 rounded-2xl text-[10px] font-black uppercase tracking-widest transition-all ${activeTab === tab.toLowerCase() ? 'bg-white dark:bg-slate-800 text-primary dark:text-blue-400 shadow-sm border border-gray-100 dark:border-gray-700' : 'text-gray-400'}`}>{tab}</button>
                                 ))}
                             </div>
-
-                            {/* Tab Content */}
-                            <div className="flex-1 overflow-hidden relative">
-                                {activeTab === 'bible' && (
-                                    <div className="h-full overflow-y-auto no-scrollbar">
-                                        <BibleReader />
-                                    </div>
-                                )}
-
-                                {activeTab === 'chat' && (
-                                    <div className="h-full flex flex-col bg-[#F0F2F5] dark:bg-slate-900/50">
-                                        <div className="flex-1 overflow-y-auto p-6 space-y-4">
-                                            {LIVE_CHAT_MESSAGES.map(m => (
-                                                <div key={m.id} className="flex gap-3 items-start animate-fade-in-up">
-                                                    <div className="size-8 rounded-full bg-white dark:bg-slate-700 flex items-center justify-center text-xs font-black shadow-sm shrink-0 uppercase border border-gray-100 dark:border-gray-600">
-                                                        {m.user[0]}
-                                                    </div>
-                                                    <div className="bg-white dark:bg-slate-800 p-3 rounded-2xl rounded-tl-none shadow-sm border border-gray-100 dark:border-gray-700">
-                                                        <p className={`text-[10px] font-black uppercase tracking-widest mb-1 ${m.color}`}>{m.user}</p>
-                                                        <p className="text-xs text-slate-700 dark:text-gray-300 font-medium">{m.msg}</p>
-                                                    </div>
-                                                </div>
-                                            ))}
-                                            <div className="text-center py-4">
-                                                <span className="bg-gray-200 dark:bg-slate-700 text-[9px] font-bold text-gray-500 dark:text-gray-400 px-2 py-1 rounded uppercase tracking-tighter">Welcome to Live Chat</span>
-                                            </div>
-                                        </div>
-                                        {/* Chat Input */}
-                                        <div className="p-4 bg-white dark:bg-slate-800 border-t border-gray-100 dark:border-gray-700">
-                                            <div className="relative flex items-center">
-                                                <input 
-                                                    type="text" 
-                                                    value={chatInput}
-                                                    onChange={e => setChatInput(e.target.value)}
-                                                    placeholder="Say something nice..." 
-                                                    className="w-full bg-gray-50 dark:bg-slate-900 border-none rounded-2xl py-3 pl-4 pr-12 text-xs font-bold focus:ring-1 focus:ring-primary shadow-inner dark:text-white"
-                                                />
-                                                <button className="absolute right-2 p-1.5 bg-primary text-white rounded-xl hover:bg-primary-dark transition shadow-md">
-                                                    <span className="material-symbols-outlined text-[18px]">send</span>
-                                                </button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                )}
-
-                                {activeTab === 'notes' && (
-                                    <div className="h-full flex flex-col p-6 space-y-4">
-                                        <div className="flex items-center justify-between mb-2">
-                                            <h3 className="text-sm font-black text-slate-900 dark:text-white uppercase tracking-widest">Sermon Notes</h3>
-                                            <button className="text-[10px] font-black text-primary uppercase tracking-widest hover:underline">Download PDF</button>
-                                        </div>
-                                        <textarea 
-                                            placeholder="Write down what God is speaking to your heart..." 
-                                            className="flex-1 w-full bg-gray-50 dark:bg-slate-900 border-none rounded-2xl p-4 text-sm font-medium leading-relaxed focus:ring-1 focus:ring-primary shadow-inner dark:text-white resize-none"
-                                        />
-                                        <button className="w-full py-3 bg-gray-100 dark:bg-slate-700 text-slate-600 dark:text-gray-300 font-black text-[10px] uppercase tracking-[0.2em] rounded-xl hover:bg-gray-200 transition">Save to My Profile</button>
-                                    </div>
-                                )}
-                            </div>
-                        </div>
-
-                        {/* Join Us Ad Card */}
-                        <div className="bg-gradient-to-br from-[#00008B] to-blue-700 rounded-[2.5rem] p-8 text-white relative overflow-hidden shadow-2xl">
-                            <div className="absolute top-0 right-0 p-6 opacity-10 pointer-events-none">
-                                <span className="material-symbols-outlined text-8xl">home</span>
-                            </div>
-                            <div className="relative z-10">
-                                <h3 className="text-xl font-black mb-2">Visit Us In-Person</h3>
-                                <p className="text-blue-100 text-xs font-medium mb-6 leading-relaxed opacity-80">We'd love to see you this Sunday at our main campus in Bungoma!</p>
-                                <button className="bg-white text-primary px-6 py-2.5 rounded-xl font-black text-[10px] uppercase tracking-widest shadow-xl hover:scale-105 transition transform">Plan Your Visit</button>
-                            </div>
+                            <div className="flex-1 overflow-hidden">{activeTab === 'chat' && <div className="h-full bg-gray-50 dark:bg-slate-900/50 p-6">Live chat active...</div>}{activeTab === 'bible' && <BibleReader />}</div>
                         </div>
                     </div>
                 </div>
